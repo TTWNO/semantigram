@@ -1,0 +1,20 @@
+[package]
+name = "websocket-server"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+axum = { git = "https://github.com/tokio-rs/axum",  features = ["ws"] }
+axum-extra = { git = "https://github.com/tokio-rs/axum", features = ["typed-header"] }
+futures = "0.3"
+futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
+headers = "0.3"
+serde = { version = "1.0.178", features = ["derive"] }
+serde_json = "1.0.104"
+tokio = { version = "1.0", features = ["full"] }
+tokio-tungstenite = "0.19"
+tower = { version = "0.4", features = ["util"] }
+tower-http = { version = "0.4.0", features = ["fs", "trace"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
