@@ -11,9 +11,9 @@ const highlightSocket = new WebSocket(
 );
 
 highlightSocket.onopen = (event) => {
-    console.log(event.data);
+    let username = (Math.random() + 1).toString(36).substring(7);
     // send message with username
-
+    highlightSocket.send(username)
 };
   
 highlightSocket.onclose = (event) => {
@@ -22,22 +22,17 @@ highlightSocket.onclose = (event) => {
 
 highlightSocket.onmessage = (event) => {
     console.log(event.data);
+    const datas = JSON.parse(event.data);
+    const index = datas["index"];
+
+    console.log(HighlightElement.GRAPHBAR+"-"+index);
+    let barItem = document.getElementById(HighlightElement.GRAPHBAR+"-"+index);
+    let tableItem = document.getElementById(HighlightElement.TABLE+"-"+index);
+
+    barItem.setAttribute("fill", "red");
+    tableItem.setAttribute("style", "color: red;");
 };
 
-function highlightItem(index, highlight, from) {
-    const sourceItemId = from+"-"+index;
-    console.log(sourceItemId);
-
-    let sourceItem = document.getElementById(from+"-"+index);
-
-    switch (from) {
-        case HighlightElement.GRAPHBAR:
-            sourceItem.setAttribute("fill", "red");
-            //highlightSocket.send("{'index': '%s', 'action': '%s'}".format(index, 'highlight'));
-            break;       
-        case HighlightElement.TABLE:
-            sourceItem.setAttribute("style", "color: red;");
-            break;
-    }
-    
+function highlightItem(index, highlight) {
+    highlightSocket.send(`{"index": ${index}, "action": "highlight"}`.toString());    
 };

@@ -74,8 +74,7 @@ print("""
     <script src="websocket-client.js"></script> 
   </head>
   <body>
-    <button onclick="highlightItem(3, true, 'bar')">Highlight graph bar stuff</button>
-    <button onclick="highlightItem(2, true, 'table')">Highlight table stuff</button>
+    <button onclick="highlightItem(3, true)">Highlight stuff</button>
     {0}
     <hr/>
     {1}
