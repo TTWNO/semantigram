@@ -56,7 +56,7 @@ def to_svg(common_fmt):
     proportion = value / largest_value
     height = proportion * y_axis_size
     y = (1000 - height) + padding
-    y_text = 1000 - padding
+    y_text = y + padding
     # produce SVG
     bar = f"<rect id=\"bar-{index}\" x=\"{x}\" y=\"{y}\" width=\"{x_width}\" height=\"{height}\" fill=\"{fill_color}\"></rect>"
     bar_label = f"<text x=\"{x}\" y=\"{y_text}\">{value}</text>"
