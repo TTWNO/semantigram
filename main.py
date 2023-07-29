@@ -22,12 +22,12 @@ def to_html(common_fmt):
         <th>Index</th>
         <th>Year</th>
         <th>Revenue</th>
-      <tr>
+      </tr>
     </thead>
     <tbody>"""
   for (index, row) in enumerate(common_fmt):
     html += """
-    <tr>
+    <tr id="table-{0}">
       <td>{0}</td>
       <td>{1}</td>
       <td>{2}</td>
@@ -58,7 +58,7 @@ def to_svg(common_fmt):
     y = (1000 - height) + padding
     y_text = 1000 - padding
     # produce SVG
-    bar = f"<rect x=\"{x}\" y=\"{y}\" width=\"{x_width}\" height=\"{height}\" fill=\"{fill_color}\"></rect>"
+    bar = f"<rect id=\"bar-{index}\" x=\"{x}\" y=\"{y}\" width=\"{x_width}\" height=\"{height}\" fill=\"{fill_color}\"></rect>"
     bar_label = f"<text x=\"{x}\" y=\"{y_text}\">{value}</text>"
     bars.append(f"{bar}{bar_label}")
   return "<svg width=\"1000\" height=\"1000\"><rect id=\"background\" x=\"0\" y=\"0\" width=\"1000\" height=\"1000\" fill=\"white\"></rect>{0}</svg>".format("".join(bars))
@@ -70,8 +70,12 @@ svg = to_svg(common)
 print("""
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+    <script src="websocket-client.js"></script> 
+  </head>
   <body>
+    <button onclick="highlightItem(3, true, 'bar')">Highlight graph bar stuff</button>
+    <button onclick="highlightItem(2, true, 'table')">Highlight table stuff</button>
     {0}
     <hr/>
     {1}
