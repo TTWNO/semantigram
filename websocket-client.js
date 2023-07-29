@@ -15,10 +15,6 @@ highlightSocket.onopen = (event) => {
     // send message with username
     highlightSocket.send(username)
 };
-  
-highlightSocket.onclose = (event) => {
-    console.warn(event.data);
-};
 
 highlightSocket.onmessage = (event) => {
     console.log(event.data);
@@ -29,10 +25,14 @@ highlightSocket.onmessage = (event) => {
     let barItem = document.getElementById(HighlightElement.GRAPHBAR+"-"+index);
     let tableItem = document.getElementById(HighlightElement.TABLE+"-"+index);
 
-    barItem.setAttribute("fill", "red");
-    tableItem.setAttribute("style", "color: red;");
+    barItem.classList.toggle("highlight");
+    var children = tableItem.children;
+    for (var i = 0; i < children.length; i++) {
+        var tableChild = children[i];
+        tableChild.classList.toggle("highlight");
+    }
 };
 
 function highlightItem(index, highlight) {
-    highlightSocket.send(`{"index": ${index}, "action": "highlight"}`.toString());    
+    highlightSocket.send(`{"index": ${index}, "action": "highlight"}`);    
 };

@@ -31,7 +31,7 @@ def to_html(common_fmt):
       <td class="highlightable">{0}</td>
       <td class="highlightable">{1}</td>
       <td class="highlightable">{2}</td>
-    </tr>""".format(index+1, row["Year"], row["Revenue"])
+    </tr>""".format(index, row["Year"], row["Revenue"])
   html += "</tbody>"
   html += "</table>"
 
@@ -76,7 +76,6 @@ print("""
     <script defer src="interactive-highlight.js"></script>
   </head>
   <body>
-    <button onclick="highlightItem(3, true)">Highlight stuff</button>
     {0}
     <hr/>
     {1}
