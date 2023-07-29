@@ -5,9 +5,13 @@
 //);
 
 const highlight_table_focus = (ev) => {
-  const item = ev.target;
-  item.classList.toggle("highlight")
-  console.log(ev)
+  let action = "highlight"
+  let clickedItem = ev.target;
+  item = clickedItem.parentElement;
+
+  const index = item.id.replace('table-', '');
+
+  highlightSocket.send(`{"index": ${index}, "action": "${action}"}`);    
 }
 
 const highlight_svg_click = (ev) => {
@@ -19,6 +23,8 @@ const highlight_svg_click = (ev) => {
 
 document.querySelectorAll("table tr")
   .forEach((item) => {
+    // console.log(item)
+    item.addEventListener("focus", highlight_table_focus)
     item.addEventListener("click", highlight_table_focus)
   })
 
