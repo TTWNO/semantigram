@@ -28,9 +28,9 @@ def to_html(common_fmt):
   for (index, row) in enumerate(common_fmt):
     html += """
     <tr id="table-{0}">
-      <td>{0}</td>
-      <td>{1}</td>
-      <td>{2}</td>
+      <td class="highlightable">{0}</td>
+      <td class="highlightable">{1}</td>
+      <td class="highlightable">{2}</td>
     </tr>""".format(index+1, row["Year"], row["Revenue"])
   html += "</tbody>"
   html += "</table>"
@@ -72,6 +72,8 @@ print("""
 <html>
   <head>
     <script src="websocket-client.js"></script> 
+    <link rel="stylesheet" href="main.css"/>
+    <script defer src="interactive-highlight.js"></script>
   </head>
   <body>
     <button onclick="highlightItem(3, true, 'bar')">Highlight graph bar stuff</button>
