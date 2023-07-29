@@ -4,7 +4,7 @@ const HighlightElement = Object.freeze({
     GRAPHBAR: "bar",
 });
 const fromTo = {'table': 'bar', 'bar': 'table'};
-const websocketServer = "ws://localhost";
+const websocketServer = "ws://localhost:3000/ws";
 
 const highlightSocket = new WebSocket(
     websocketServer,
