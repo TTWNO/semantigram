@@ -16,7 +16,7 @@ const highlight_table_focus = (ev) => {
 
 const highlight_svg_click = (ev) => {
   const bar = ev.target;
-  bar.classList.toggle("highlight")
+  
   const id = Number(bar.id.replace("bar-", ""))
   highlightSocket.send(JSON.stringify({index: id, action: "highlight"}))
 }
