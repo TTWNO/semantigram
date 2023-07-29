@@ -1,5 +1,14 @@
+import csv
+
+CSV_FILE_NAME = "data.csv"
+
 def common_format():
-  pass
+  data = []
+  with open(CSV_FILE_NAME) as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+      data.append(row)
+  return data
 
 def to_html(common_fmt):
   pass
