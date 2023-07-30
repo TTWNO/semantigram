@@ -32,13 +32,13 @@ highlightSocket.onmessage = (event) => {
 		const is_enabled = !!children[3].children[0].checked;
 		const log = document.querySelector("#a11y-log");
 		if (is_enabled) {
-			const text = "row " + index + " has been unselected";
+			const text = "row " + index + " has been unselected\n";
 			console.log(text);
-			log.innerHTML = text;
+			log.innerHTML += text;
 		} else {
-			const text = "row " + index + " has been selected";
+			const text = "row " + index + " has been selected\n";
 			console.log(text);
-			log.innerHTML = text;
+			log.innerHTML += text;
 		}
 
     barItem.classList.toggle("highlight");
