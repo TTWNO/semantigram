@@ -1,12 +1,12 @@
 const ws_proto = window.location.protocol === "https:" ? "wss" : "ws";
-const hostname = window.location.hostname === "" ? "localhost" : window.location.hostname;
+const hostname = window.location.hostname === "" ? "localhost:3000" : window.location.hostname;
 // message will be {'index': 0, 'action': 'highlight'}
 const HighlightElement = Object.freeze({
     TABLE: "table",
     GRAPHBAR: "bar",
 });
 const fromTo = {'table': 'bar', 'bar': 'table'};
-const websocketServer = ws_proto + "://" + hostname + ":3000/ws";
+const websocketServer = ws_proto + "://" + hostname + "/ws";
 console.log("Connect to ", websocketServer);
 
 const highlightSocket = new WebSocket(
