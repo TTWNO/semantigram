@@ -34,11 +34,11 @@ highlightSocket.onmessage = (event) => {
 		if (is_enabled) {
 			const text = "row " + index + " has been unselected";
 			console.log(text);
-			log.innerHTML += text;
+			log.innerHTML = text;
 		} else {
 			const text = "row " + index + " has been selected";
 			console.log(text);
-			log.innerHTML += text;
+			log.innerHTML = text;
 		}
 
     barItem.classList.toggle("highlight");

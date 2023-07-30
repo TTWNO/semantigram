@@ -79,7 +79,7 @@ print("""
   </head>
   <body>
     {0}
-		<textarea editable="false" role="log" id="a11y-log" class="sr-only"></textarea>
+		<textarea editable="false" role="log" id="a11y-log" class="sr-only" aria-live="polite" aria-atomic="false"></textarea>
     <hr/>
     {1}
   </body>
