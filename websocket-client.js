@@ -27,9 +27,21 @@ highlightSocket.onmessage = (event) => {
     console.log(HighlightElement.GRAPHBAR+"-"+index);
     let barItem = document.getElementById(HighlightElement.GRAPHBAR+"-"+index);
     let tableItem = document.getElementById(HighlightElement.TABLE+"-"+index);
+    var children = tableItem.children;
+
+		const is_enabled = !!children[3].children[0].checked;
+		const log = document.querySelector("#a11y-log");
+		if (is_enabled) {
+			const text = "row " + index + " has been unselected<br/>";
+			console.log(text);
+			log.innerHTML += text;
+		} else {
+			const text = "row " + index + " has been selected<br/>";
+			console.log(text);
+			log.innerHTML += text;
+		}
 
     barItem.classList.toggle("highlight");
-    var children = tableItem.children;
     for (var i = 0; i < children.length; i++) {
         var tableChild = children[i];
         tableChild.classList.toggle("highlight");
