@@ -35,7 +35,7 @@ const highlight_svg_click = (ev) => {
 
 document.querySelectorAll('input[type="checkbox"]')
 	.forEach((item) => {
-		item.addEventListener("input", highlight_table_checkbox)
+		item.addEventListener("change", highlight_table_checkbox)
 	})
 
 document.querySelectorAll("table tr")
