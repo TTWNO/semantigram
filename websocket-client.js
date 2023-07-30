@@ -1,11 +1,13 @@
-const ws_proto = location.protocol === "https" ? "ws" : "wss";
+const ws_proto = window.location.protocol === "https:" ? "wss" : "ws";
+const hostname = window.location.hostname === "" ? "localhost" : window.location.hostname;
 // message will be {'index': 0, 'action': 'highlight'}
 const HighlightElement = Object.freeze({
     TABLE: "table",
     GRAPHBAR: "bar",
 });
 const fromTo = {'table': 'bar', 'bar': 'table'};
-const websocketServer = ws_proto + "://" + window.location.hostname + ":3000/ws";
+const websocketServer = ws_proto + "://" + hostname + ":3000/ws";
+console.log("Connect to ", websocketServer);
 
 const highlightSocket = new WebSocket(
     websocketServer,
@@ -33,7 +35,7 @@ highlightSocket.onmessage = (event) => {
         tableChild.classList.toggle("highlight");
     }
 		// toggle checkbox
-		children[3].checked = !children[3].checked;
+		children[3].children[0].checked = !children[3].children[0].checked;
 };
 
 function highlightItem(index, highlight) {
