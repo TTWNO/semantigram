@@ -1,3 +1,11 @@
+.sr-only {
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: -100000;
+	left: -100000;
+}
+
 table {
 	border-collapse: collapse;
 }
