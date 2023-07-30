@@ -5,6 +5,7 @@
 //);
 
 const highlight_table_checkbox = (ev) => {
+	ev.target.checked = !ev.target.checked;
   let action = "highlight"
   let clickedItem = ev.target;
   item = clickedItem.parentElement.parentElement;
