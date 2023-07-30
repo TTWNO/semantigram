@@ -1,10 +1,11 @@
+const ws_proto = location.protocol === "https" ? "ws" : "wss";
 // message will be {'index': 0, 'action': 'highlight'}
 const HighlightElement = Object.freeze({
     TABLE: "table",
     GRAPHBAR: "bar",
 });
 const fromTo = {'table': 'bar', 'bar': 'table'};
-const websocketServer = "ws://a11y.tait.tech:3000/ws";
+const websocketServer = ws_proto + "://" + window.location.hostname + ":3000/ws";
 
 const highlightSocket = new WebSocket(
     websocketServer,
