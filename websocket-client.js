@@ -31,6 +31,8 @@ highlightSocket.onmessage = (event) => {
         var tableChild = children[i];
         tableChild.classList.toggle("highlight");
     }
+		// toggle checkbox
+		children[3].checked = !children[3].checked;
 };
 
 function highlightItem(index, highlight) {

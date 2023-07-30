@@ -4,6 +4,16 @@
 //    websocketServer,
 //);
 
+const highlight_table_checkbox = (ev) => {
+  let action = "highlight"
+  let clickedItem = ev.target;
+  item = clickedItem.parentElement.parentElement;
+
+  const index = item.id.replace('table-', '');
+
+  highlightSocket.send(`{"index": ${index}, "action": "${action}"}`);    
+}
+
 const highlight_table_focus = (ev) => {
   let action = "highlight"
   let clickedItem = ev.target;
@@ -20,6 +30,11 @@ const highlight_svg_click = (ev) => {
   const id = Number(bar.id.replace("bar-", ""))
   highlightSocket.send(JSON.stringify({index: id, action: "highlight"}))
 }
+
+document.querySelectorAll('input[type="checkbox"]')
+	.forEach((item) => {
+		item.addEventListener("input", highlight_table_checkbox)
+	})
 
 document.querySelectorAll("table tr")
   .forEach((item) => {
