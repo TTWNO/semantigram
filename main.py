@@ -79,6 +79,7 @@ print("""
   </head>
   <body>
     {0}
+		<textarea editable="false" role="log" id="a11y-log" class="sr-only"></textarea>
     <hr/>
     {1}
   </body>
