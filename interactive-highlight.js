@@ -8,6 +8,7 @@ const highlight_table_checkbox = (ev) => {
   let action = "highlight"
   let clickedItem = ev.target;
   item = clickedItem.parentElement.parentElement;
+	ev.preventDefault();
 
   const index = item.id.replace('table-', '');
 
