@@ -8,12 +8,13 @@ const highlight_table_checkbox = (ev) => {
   let action = "highlight"
   let clickedItem = ev.target;
   item = clickedItem.parentElement.parentElement;
-	ev.preventDefault();
-	ev.stopPropagation();
 
   const index = item.id.replace('table-', '');
 
   highlightSocket.send(`{"index": ${index}, "action": "${action}"}`);    
+	ev.preventDefault();
+	ev.stopPropagation();
+	return false;
 }
 
 const highlight_table_focus = (ev) => {
