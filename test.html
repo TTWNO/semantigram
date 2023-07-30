@@ -17,6 +17,7 @@
         <th>Index</th>
         <th>Year</th>
         <th>Revenue</th>
+				<th id="highlight_heading">Highlighted</th>
       </tr>
     </thead>
     <tbody>
@@ -24,67 +25,81 @@
       <td class="highlightable">0</td>
       <td class="highlightable">2010</td>
       <td class="highlightable">20000</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-1">
       <td class="highlightable">1</td>
       <td class="highlightable">2011</td>
       <td class="highlightable">24000</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-2">
       <td class="highlightable">2</td>
       <td class="highlightable">2012</td>
       <td class="highlightable">15000</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-3">
       <td class="highlightable">3</td>
       <td class="highlightable">2013</td>
       <td class="highlightable">49000</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-4">
       <td class="highlightable">4</td>
       <td class="highlightable">2014</td>
       <td class="highlightable">29333</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-5">
       <td class="highlightable">5</td>
       <td class="highlightable">2015</td>
       <td class="highlightable">92555</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-6">
       <td class="highlightable">6</td>
       <td class="highlightable">2016</td>
       <td class="highlightable">12356</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-7">
       <td class="highlightable">7</td>
       <td class="highlightable">2017</td>
       <td class="highlightable">25352</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-8">
       <td class="highlightable">8</td>
       <td class="highlightable">2018</td>
       <td class="highlightable">92562</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-9">
       <td class="highlightable">9</td>
       <td class="highlightable">2019</td>
       <td class="highlightable">12593</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-10">
       <td class="highlightable">10</td>
       <td class="highlightable">2020</td>
       <td class="highlightable">18000</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-11">
       <td class="highlightable">11</td>
       <td class="highlightable">2021</td>
       <td class="highlightable">12000</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>
     <tr id="table-12">
       <td class="highlightable">12</td>
       <td class="highlightable">2022</td>
       <td class="highlightable">25533</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr></tbody></table>
+		<textarea editable="false" role="log" id="a11y-log" class="sr-only"></textarea>
     <hr/>
     <svg width="1000" height="1000"><rect id="background" x="0" y="0" width="1000" height="1000" fill="white"></rect><rect id="bar-0" x="0" y="808.9286100127482" width="50" height="216.0713899872518" fill="lightblue"></rect><text x="0" y="833.9286100127482">20000</text><rect id="bar-1" x="75" y="765.7143320152978" width="50" height="259.2856679847022" fill="lightblue"></rect><text x="75" y="790.7143320152978">24000</text><rect id="bar-2" x="150" y="862.9464575095611" width="50" height="162.05354249043884" fill="lightblue"></rect><text x="150" y="887.9464575095611">15000</text><rect id="bar-3" x="225" y="495.6250945312331" width="50" height="529.3749054687669" fill="lightblue"></rect><text x="225" y="520.6250945312331">49000</text><rect id="bar-4" x="300" y="708.0988958751972" width="50" height="316.9011041248028" fill="lightblue"></rect><text x="300" y="733.0988958751972">29333</text><rect id="bar-5" x="375" y="25.07562498649554" width="50" height="999.9243750135045" fill="lightblue"></rect><text x="375" y="50.07562498649554">92555</text><rect id="bar-6" x="450" y="891.5110952658758" width="50" height="133.48890473412413" fill="lightblue"></rect><text x="450" y="916.5110952658758">12356</text><rect id="bar-7" x="525" y="751.1079060521597" width="50" height="273.89209394784035" fill="lightblue"></rect><text x="525" y="776.1079060521597">25352</text><rect id="bar-8" x="600" y="25.0" width="50" height="1000.0" fill="lightblue"></rect><text x="600" y="50.0">92562</text><rect id="bar-9" x="675" y="888.9506492945269" width="50" height="136.04935070547307" fill="lightblue"></rect><text x="675" y="913.9506492945269">12593</text><rect id="bar-10" x="750" y="830.5357490114734" width="50" height="194.4642509885266" fill="lightblue"></rect><text x="750" y="855.5357490114734">18000</text><rect id="bar-11" x="825" y="895.3571660076489" width="50" height="129.6428339923511" fill="lightblue"></rect><text x="825" y="920.3571660076489">12000</text><rect id="bar-12" x="900" y="749.152459972775" width="50" height="275.847540027225" fill="lightblue"></rect><text x="900" y="774.152459972775">25533</text></svg>
   </body>
