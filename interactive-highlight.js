@@ -9,6 +9,7 @@ const highlight_table_checkbox = (ev) => {
   let clickedItem = ev.target;
   item = clickedItem.parentElement.parentElement;
 	ev.preventDefault();
+	ev.stopPropagation();
 
   const index = item.id.replace('table-', '');
 
