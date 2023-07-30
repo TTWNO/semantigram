@@ -22,6 +22,7 @@ def to_html(common_fmt):
         <th>Index</th>
         <th>Year</th>
         <th>Revenue</th>
+				<th id="highlight_heading">Highlighted</th>
       </tr>
     </thead>
     <tbody>"""
@@ -31,6 +32,7 @@ def to_html(common_fmt):
       <td class="highlightable">{0}</td>
       <td class="highlightable">{1}</td>
       <td class="highlightable">{2}</td>
+      <td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
     </tr>""".format(index, row["Year"], row["Revenue"])
   html += "</tbody>"
   html += "</table>"
