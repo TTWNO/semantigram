@@ -11,40 +11,43 @@ use axum::{
         ws::{Message, WebSocket, WebSocketUpgrade},
         State,
     },
-    response::{IntoResponse},
+    response::IntoResponse,
     routing::get,
     Router,
 };
 use futures::{sink::SinkExt, stream::StreamExt};
+use serde::{Deserialize, Serialize};
+use serde_json;
 use std::{
     collections::HashSet,
     sync::{Arc, Mutex},
 };
 use tokio::sync::broadcast;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-use serde::{Serialize, Deserialize};
-use serde_json;
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 enum Action {
-  Highlight,
+    Highlight,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 struct GraphChange {
-  index: i32,
-  action: Action,
+    index: i32,
+    action: Action,
 }
 
 #[test]
 fn test_from_json() {
-  let json_str = r#"{ "index": 2, "action": "highlight" }"#;
-  let change: GraphChange = serde_json::from_str(json_str).unwrap();
-  assert_eq!(change, GraphChange {
-    index: 2,
-    action: Action::Highlight,
-  });
+    let json_str = r#"{ "index": 2, "action": "highlight" }"#;
+    let change: GraphChange = serde_json::from_str(json_str).unwrap();
+    assert_eq!(
+        change,
+        GraphChange {
+            index: 2,
+            action: Action::Highlight,
+        }
+    );
 }
 
 // Our shared state
@@ -128,8 +131,11 @@ async fn websocket(stream: WebSocket, state: Arc<AppState>) {
         while let Ok(msg) = rx.recv().await {
             // In any websocket error, break loop.
             let change_json = match serde_json::to_string(&msg) {
-              Ok(change) => change,
-              _ => break,
+                Ok(change) => {
+                    println!("Change: {change:?}");
+                    change
+                }
+                _ => break,
             };
             if sender.send(Message::Text(change_json)).await.is_err() {
                 break;
@@ -146,11 +152,11 @@ async fn websocket(stream: WebSocket, state: Arc<AppState>) {
     let mut recv_task = tokio::spawn(async move {
         while let Some(Ok(Message::Text(text))) = receiver.next().await {
             let change = match serde_json::from_str(&text) {
-              Ok(ch) => ch,
-              Err(e) => {
-                println!("{}: Error: {e:?}", name);
-                continue;
-              },
+                Ok(ch) => ch,
+                Err(e) => {
+                    println!("{}: Error: {e:?}", name);
+                    continue;
+                }
             };
             let _ = tx.send(change);
         }
@@ -175,4 +181,3 @@ fn check_username(state: &AppState, string: &mut String, name: &str) {
         string.push_str(name);
     }
 }
-
