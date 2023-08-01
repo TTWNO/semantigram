@@ -10,8 +10,8 @@
 	<tbody>
 		{% for performance in records %}
 			<tr id="table-{{ loop.index }}">
-				<td class="highlithable">{{ performance.year }}</td>
-				<td class="highlithable">{{ performance.revenue }}</td>
+				<td class="highlightable">{{ performance.year }}</td>
+				<td class="highlightable">{{ performance.revenue }}</td>
 				<td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
 			</tr>
 		{% endfor %}
