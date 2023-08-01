@@ -5,7 +5,7 @@ use askama::Template;
 
 #[derive(Clone, Debug, Template)]
 #[template(path = "partials/table.html")]
-struct HtmlTableTemplate {
+pub struct HtmlTableTemplate {
 	records: Vec<Record>,
 	caption: String,
 }
@@ -24,9 +24,25 @@ pub struct SvgTemplate {
 }
 
 mod filters {
-    pub fn to_i32(idx: &usize) -> ::askama::Result<i32> {
-			Ok(*idx as i32)
-    }
+	pub fn to_i32<T>(idx: &T) -> ::askama::Result<i32> 
+		where i32: TryFrom<T>,
+		<i32 as TryFrom<T>>::Error: std::fmt::Debug,
+		T: Copy {
+		Ok(i32::try_from(*idx).unwrap())
+	}
+	pub fn to_f64(i: &i32) -> ::askama::Result<f64> {
+		Ok(f64::try_from(*i).unwrap())
+	}
+	pub fn f_to_i32(i: &f64) -> ::askama::Result<i32> {
+		Ok((*i).round() as i32)
+	}
+}
+
+#[derive(Clone, Debug, Template)]
+#[template(path = "alpha.html")]
+pub struct AlphaTemplate {
+	pub svg: SvgTemplate,
+	pub table: HtmlTableTemplate,
 }
 
 // TODO: replace with generic "dataframe"-like structure.
@@ -49,10 +65,25 @@ fn main() -> Result<(), Box<dyn Error>>{
 	}
 	
 	let table = HtmlTableTemplate {
-		records: all_rows,
+		records: all_rows.clone(),
 		caption: "Revenue by Year".to_string(),
 	};
+	let largest_value = all_rows.iter().max_by_key(|r| r.revenue).unwrap().revenue.clone().into();
+	let svg = SvgTemplate {
+		records: all_rows,
+		x_axis_size: 1000.into(),
+		y_axis_size: 1000.into(),
+		x_width: 50.into(),
+		padding: 25.into(),
+		outline_color: "none".to_string(),
+		fill_color: "lightblue".to_string(),
+		largest_value
+	};
+	let alpha = AlphaTemplate {
+		svg,
+		table
+	};
 
-	println!("{}", &table.render()?);
+	println!("{}", &alpha.render()?);
 	Ok(())
 }
