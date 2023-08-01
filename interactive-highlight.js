@@ -12,7 +12,7 @@ const highlight_table_checkbox = (ev) => {
 
   const index = item.id.replace('table-', '');
 
-  highlightSocket.send(`{"index": ${index}, "action": "${action}"}`);    
+  highlightSocket.send(JSON.stringify({index: Number(index), action: action}));
 	ev.preventDefault();
 	ev.stopPropagation();
 	return false;
@@ -25,7 +25,7 @@ const highlight_table_focus = (ev) => {
 
   const index = item.id.replace('table-', '');
 
-  highlightSocket.send(`{"index": ${index}, "action": "${action}"}`);    
+  highlightSocket.send(JSON.stringify({index: Number(index), action: action}));    
 }
 
 const highlight_svg_click = (ev) => {
@@ -40,9 +40,8 @@ document.querySelectorAll('input[type="checkbox"]')
 		item.addEventListener("change", highlight_table_checkbox)
 	})
 
-document.querySelectorAll("table tr")
+document.querySelectorAll("table td.highlightable")
   .forEach((item) => {
-    // console.log(item)
     item.addEventListener("focus", highlight_table_focus)
     item.addEventListener("click", highlight_table_focus)
   })
