@@ -2,6 +2,7 @@
 	<caption>{{ caption }}</caption>
 	<thead>
 		<tr>
+			<th>Index</th>
 			<th>Year</th>
 			<th>Revenue</th>
 			<th id="highlight_heading">Highlighted</th>
@@ -10,6 +11,7 @@
 	<tbody>
 		{% for performance in records %}
 			<tr id="table-{{ loop.index }}">
+				<td class="highlightable">{{ loop.index }}</td>
 				<td class="highlightable">{{ performance.year }}</td>
 				<td class="highlightable">{{ performance.revenue }}</td>
 				<td class="highlightable"><input type="checkbox" aria-labelledby="highlight_heading"></td>
