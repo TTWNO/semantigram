@@ -8,9 +8,9 @@
 	</thead>
 	<tbody>
 		{% for performance in records %}
-			<tr>
-				<td>{{ performance.year }}</td>
-				<td>{{ performance.revenue }}</td>
+			<tr id="table-{{ loop.index }}">
+				<td class="highlithable">{{ performance.year }}</td>
+				<td class="highlithable">{{ performance.revenue }}</td>
 			</tr>
 		{% endfor %}
 	</tbody>
