@@ -1,0 +1,12 @@
+<svg width="1000" height="1000">
+	<rect id="background" x="0" y="0" width="1000" height="1000" fill="white"></rect>
+	{% for record in records %}
+		{% set x = (x_width + padding) + loop.index|to_i32 %}
+		{% set proportion = record.revenue / largest_value %}
+		{% set height = proportion * y_axis_size %}
+		{% set y = (1000 - height) + padding %}
+		{% set y_text = y + padding %}
+		<rect id="bar-{{ loop.index }}" x="{{ x }}" y="{{ y }}" width="{{ x_width }}" height="{{ height }}" fill="{{ fill_color }}"></rect>
+		<text x="{{ x }}" y="{{ y_text }}">{{ record.revenue }}</text>
+	{% endfor %}
+</svg>
