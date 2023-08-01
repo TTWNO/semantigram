@@ -1,0 +1,17 @@
+<table>
+	<caption>{{ caption }}</caption>
+	<thead>
+		<tr>
+			<th>Year</th>
+			<th>Revenue</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for performance in records %}
+			<tr>
+				<td>{{ performance.year }}</td>
+				<td>{{ performance.revenue }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
