@@ -11,3 +11,8 @@
   * Uses JS
   * Lots of fixed values that aren't constified
   * Font size is small
+
+## Usage
+
+To create the HTML file, and launch the websocket server, simply use the `Makefile` via the `make` command.
+Then, open the HTML file in a local browser.
