@@ -64,7 +64,7 @@ document.querySelectorAll('input[type="checkbox"]')
 		item.addEventListener("click", highlight_table_checkbox)
 	})
 
-document.querySelectorAll("[data-row][data-col]")
+document.querySelectorAll("[data-row],[data-col]")
   .forEach((item) => {
     item.addEventListener("click", highlight_element)
   })

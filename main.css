@@ -6,6 +6,10 @@
 	left: -100000;
 }
 
+body {
+  font-family: 'monospace';
+}
+
 table {
 	border-collapse: collapse;
 }
@@ -17,7 +21,6 @@ table td {
 
 table .highlight {
   background-color: #ff8500;
-
 }
 
 svg .highlight[data-type="visual"] {
@@ -25,5 +28,5 @@ svg .highlight[data-type="visual"] {
 }
 
 svg .highlight[data-type="text"] {
-  fill: blue;
+  font-weight: bold;
 }
