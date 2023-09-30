@@ -9,7 +9,7 @@ const highlight_element = (ev) => {
   const x_row = element.getAttribute('data-row');
   const x_col = element.getAttribute('data-col');
   let elementType = "cell";
-  let coordinates = [parseInt(x_row), parseInt(x_col)];
+  let coordinates = [parseInt(x_col), parseInt(x_row)];
 
   if (x_col === null) {
     elementType = "row";
