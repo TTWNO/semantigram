@@ -54,18 +54,21 @@ highlightSocket.onmessage = (event) => {
 
     const log = document.querySelector("#a11y-log");
     if (action === "highlight") {
-        const text = `${coordinates} have been unselected\n`;
-        console.log(text);
-        log.innerHTML = text;
-    } else if (action === "unhighlight") {
         const text = `${coordinates} have been selected\n`;
         console.log(text);
         log.innerHTML = text;
+        highlightItems.forEach((item) => {
+          item.classList.add(ElementState.HIGHLIGHTED);
+        });
+    } else if (action === "unhighlight") {
+        const text = `${coordinates} have been unselected\n`;
+        console.log(text);
+        log.innerHTML = text;
+        highlightItems.forEach((item) => {
+          item.classList.remove(ElementState.HIGHLIGHTED);
+        });
     }
 
-    highlightItems.forEach((item) => {
-      item.classList.toggle(ElementState.HIGHLIGHTED);
-    });
 };
 
 function highlightItem(index, highlight) {
