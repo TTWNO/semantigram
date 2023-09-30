@@ -26,25 +26,61 @@ use tokio::sync::broadcast;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "type", content = "data")]
+#[serde(rename_all = "lowercase")]
+enum Position {
+  Cell((i32, i32)),
+  Column((i32,)),
+  Row((i32,)),
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 enum Action {
     Highlight,
+    Unhighlight,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 struct GraphChange {
-    index: i32,
+    position: Position,
     action: Action,
 }
 
 #[test]
-fn test_from_json() {
-    let json_str = r#"{ "index": 2, "action": "highlight" }"#;
+fn test_from_json_cell() {
+    let json_str = r#"{ "position": {"type": "cell", "data": [2,3] }, "action": "highlight" }"#;
     let change: GraphChange = serde_json::from_str(json_str).unwrap();
     assert_eq!(
         change,
         GraphChange {
-            index: 2,
+            position: Position::Cell((2,3)),
+            action: Action::Highlight,
+        }
+    );
+}
+
+#[test]
+fn test_from_json_row() {
+    let json_str = r#"{ "position": {"type": "row", "data": [2] }, "action": "highlight" }"#;
+    let change: GraphChange = serde_json::from_str(json_str).unwrap();
+    assert_eq!(
+        change,
+        GraphChange {
+            position: Position::Row((2,)),
+            action: Action::Highlight,
+        }
+    );
+}
+
+#[test]
+fn test_from_json_col() {
+    let json_str = r#"{ "position": {"type": "column", "data": [2] }, "action": "highlight" }"#;
+    let change: GraphChange = serde_json::from_str(json_str).unwrap();
+    assert_eq!(
+        change,
+        GraphChange {
+            position: Position::Column((2,)),
             action: Action::Highlight,
         }
     );
