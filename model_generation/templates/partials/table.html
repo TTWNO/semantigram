@@ -2,18 +2,18 @@
 	<caption>{{ caption }}</caption>
 	<thead>
 		<tr>
-			<th x-col="0">Index</th>
-			<th x-col="1">Year</th>
-			<th x-col="2">Revenue</th>
+			<th data-col="0">Index</th>
+			<th data-col="1">Year</th>
+			<th data-col="2">Revenue</th>
 			<th id="highlight_heading">Highlighted</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for performance in records %}
-			<tr x-row="{{ loop.index }}">
-				<td x-col="0" x-row="{{ loop.index }}" class="highlightable">{{ loop.index }}</td>
-				<td x-col="1" x-row="{{ loop.index }}"class="highlightable">{{ performance.year }}</td>
-				<td x-col="2" x-row="{{ loop.index }}"class="highlightable">{{ performance.revenue }}</td>
+			<tr data-row="{{ loop.index }}">
+				<td data-col="0" data-row="{{ loop.index }}" class="highlightable">{{ loop.index }}</td>
+				<td data-col="1" data-row="{{ loop.index }}"class="highlightable">{{ performance.year }}</td>
+				<td data-col="2" data-row="{{ loop.index }}"class="highlightable">{{ performance.revenue }}</td>
 				<td><input type="checkbox" aria-labelledby="highlight_heading"></td>
 			</tr>
 		{% endfor %}
