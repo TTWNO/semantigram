@@ -10,7 +10,7 @@
 	</thead>
 	<tbody>
 		{% for performance in records %}
-			<tr data-row="{{ loop.index }}">
+			<tr>
 				<td data-row="{{ loop.index }}" class="highlightable">{{ loop.index }}</td>
 				<td data-col="1" data-row="{{ loop.index }}"class="highlightable">{{ performance.year }}</td>
 				<td data-col="2" data-row="{{ loop.index }}"class="highlightable">{{ performance.revenue }}</td>
