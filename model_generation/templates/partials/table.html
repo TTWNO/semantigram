@@ -11,7 +11,7 @@
 	<tbody>
 		{% for performance in records %}
 			<tr data-row="{{ loop.index }}">
-				<td data-col="0" data-row="{{ loop.index }}" class="highlightable">{{ loop.index }}</td>
+				<td data-row="{{ loop.index }}" class="highlightable">{{ loop.index }}</td>
 				<td data-col="1" data-row="{{ loop.index }}"class="highlightable">{{ performance.year }}</td>
 				<td data-col="2" data-row="{{ loop.index }}"class="highlightable">{{ performance.revenue }}</td>
 				<td><input type="checkbox" aria-labelledby="highlight_heading"></td>
