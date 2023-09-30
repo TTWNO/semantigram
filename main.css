@@ -16,7 +16,8 @@ table td {
 }
 
 table .highlight {
-  color: #ff8500;
+  background-color: #ff8500;
+
 }
 
 svg .highlight[data-type="visual"] {
