@@ -1,10 +1,6 @@
 const ws_proto = window.location.protocol === "https:" ? "wss" : "ws";
 const hostname = window.location.hostname === "" ? "localhost:3000" : window.location.hostname;
 // highlight / unhighlight
-const HighlightElement = Object.freeze({
-    HTML: "table",
-    GRAPHIC: "bar",
-});
 const ElementState = Object.freeze({
     HIGHLIGHTED: "highlight",
     HOVERED: "hovered",
@@ -37,44 +33,39 @@ highlightSocket.onmessage = (event) => {
     const coordinates = datas["position"]["data"]
     const action = datas["action"]
 
+    let selector;
+    let highlightItems;
     switch (type) {
         case "row":
-            break;
-        case "column":
-            break;
-        case "cell":
-            break;
-        default:
-            break;
-    }
+              selector = `[data-row="${coordinates}"]`;
+              break;
+          case "column":
+              selector = `[data-col="${coordinates}"]`;
+              break;
+          case "cell":
+              selector = `[data-col="${coordinates[0]}"][data-row="${coordinates[1]}"]`;
+              break;
+          default:
+              break;
+      }
+      console.log(selector);
+      highlightItems = document.querySelectorAll(selector);
+      console.log(highlightItems);
 
-    console.log(HighlightElement.GRAPHIC + "-" + index);
-
-    let typeItem;
-    let barItem = document.getElementById(HighlightElement.GRAPHIC + "-" + index);
-    let tableItem = document.getElementById(HighlightElement.HTML + "-" + index);
-    var children = tableItem.children;
-
-    const is_enabled = !!children[3].children[0].checked;
     const log = document.querySelector("#a11y-log");
-    if (is_enabled) {
-        const text = "row " + index + " has been unselected\n";
+    if (action === "highlight") {
+        const text = `${coordinates} have been unselected\n`;
         console.log(text);
         log.innerHTML = text;
-    } else {
-        const text = "row " + index + " has been selected\n";
+    } else if (action === "unhighlight") {
+        const text = `${coordinates} have been selected\n`;
         console.log(text);
         log.innerHTML = text;
     }
 
-    barItem.classList.toggle(ElementState.HIGHLIGHTED);
-    for (var i = 0; i < children.length; i++) {
-        var tableChild = children[i];
-        tableChild.classList.toggle(ElementState.HIGHLIGHTED);
-    }
-
-    // toggle checkbox
-    children[3].children[0].checked = !children[3].children[0].checked;
+    highlightItems.forEach((item) => {
+      item.classList.toggle(ElementState.HIGHLIGHTED);
+    });
 };
 
 function highlightItem(index, highlight) {
