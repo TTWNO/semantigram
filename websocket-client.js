@@ -43,7 +43,7 @@ highlightSocket.onmessage = (event) => {
               selector = `[data-col="${coordinates}"]`;
               break;
           case "cell":
-              selector = `[data-col="${coordinates[0]}"][data-row="${coordinates[1]}"]`;
+              selector = `[data-col="${coordinates[0]}"][data-row="${coordinates[1]}"], [data-col="${coordinates[0]}"]:not([data-row]), [data-row="${coordinates[1]}"]:not([data-col])`;
               break;
           default:
               break;
