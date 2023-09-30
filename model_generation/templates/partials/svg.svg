@@ -7,9 +7,9 @@
 		{% set y = (1000 - (height|f_to_i32)) + padding %}
 		{% set y_text = y + padding %}
     <g data-row="{{ loop.index }}">
-      <rect data-col="2" data-row="{{ loop.index }}" id="bar-{{ loop.index }}" x="{{ x }}" y="{{ y }}" width="{{ x_width }}" height="{{ height }}" fill="{{ fill_color }}"></rect>
-      <text data-col="2" data-row="{{ loop.index }}" x="{{ x }}" y="{{ y_text }}">{{ record.revenue }}</text>
-      <text data-row="{{ loop.index }}" data-col="1" x="{{ x + 100 }}" y="{{ y_text }}">{{ record.year }}</text>
+      <rect data-type="visual" data-col="2" data-row="{{ loop.index }}" id="bar-{{ loop.index }}" x="{{ x }}" y="{{ y }}" width="{{ x_width }}" height="{{ height }}" fill="{{ fill_color }}"></rect>
+      <text data-type="text" data-col="2" data-row="{{ loop.index }}" x="{{ x }}" y="{{ y_text }}">{{ record.revenue }}</text>
+      <text data-type="text" data-row="{{ loop.index }}" data-col="1" x="{{ x + 100 }}" y="{{ y_text }}">{{ record.year }}</text>
     </g>
 	{% endfor %}
 </svg>

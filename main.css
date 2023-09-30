@@ -19,6 +19,7 @@ table .highlight {
   color: red;
 }
 
-svg .highlight {
+svg .highlight[data-type="visual"] {
   fill: red;
 }
+
