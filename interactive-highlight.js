@@ -10,6 +10,11 @@ const highlight_element = (ev) => {
   const x_col = element.getAttribute('data-col');
   let elementType = "cell";
   let coordinates = [parseInt(x_col), parseInt(x_row)];
+  let action = "highlight";
+
+  if (element.classList.contains("highlight")) {
+     action = "unhighlight"
+  }
 
   if (x_col === null) {
     elementType = "row";
@@ -20,8 +25,8 @@ const highlight_element = (ev) => {
     coordinates = [parseInt(x_col)];
   }
   
-  console.log(JSON.stringify({position: {type: elementType, data: coordinates}, action: "highlight"}))
-  highlightSocket.send(JSON.stringify({position: {type: elementType, data: coordinates}, action: "highlight"}))
+  console.log(JSON.stringify({position: {type: elementType, data: coordinates}, action: action}))
+  highlightSocket.send(JSON.stringify({position: {type: elementType, data: coordinates}, action: action}))
 }
 
 const highlight_table_checkbox = (ev) => {
