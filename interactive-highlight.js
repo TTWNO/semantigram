@@ -4,6 +4,25 @@
 //    websocketServer,
 //);
 
+const highlight_element = (ev) => {
+  const element = ev.target;
+  const x_row = element.getAttribute('data-row');
+  const x_col = element.getAttribute('data-col');
+  let elementType = "cell";
+  let coordinates = [parseInt(x_row), parseInt(x_col)];
+
+  if (x_col === null) {
+    elementType = "row";
+    coordinates = [parseInt(x_row)];
+  }
+  if (x_row === null) {
+    elementType = "column";
+    coordinates = [parseInt(x_col)];
+  }
+  
+  highlightSocket.send(JSON.stringify({position: {type: elementType, data: coordinates}, action: "highlight"}))
+}
+
 const highlight_table_checkbox = (ev) => {
 	ev.target.checked = !ev.target.checked;
   let action = "highlight"
@@ -39,6 +58,21 @@ document.querySelectorAll('input[type="checkbox"]')
 	.forEach((item) => {
 		item.addEventListener("change", highlight_table_checkbox)
 	})
+
+document.querySelectorAll("table th")
+  .forEach((item) => {
+    item.addEventListener("click", highlight_element)
+  })
+
+document.querySelectorAll("table tbody tr")
+  .forEach((item) => {
+    item.addEventListener("click", highlight_element)
+  })
+
+document.querySelectorAll("table tbody td")
+  .forEach((item) => {
+    item.addEventListener("click", highlight_element)
+  })
 
 document.querySelectorAll("table td.highlightable")
   .forEach((item) => {
