@@ -3,18 +3,25 @@
 	<thead>
 		<tr>
 			<th data-col="0">Index</th>
-			<th data-col="1">Year <span class="sr-only"></span></th>
-			<th data-col="2">Revenue <span class="sr-only"></span></th>
-			<th id="highlight_heading">Highlighted</th>
+			<th data-col="1">Year</th>
+			<th data-col="2">Revenue</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for performance in records %}
 			<tr>
-				<td data-row="{{ loop.index }}" class="highlightable">{{ loop.index }} <span class="sr-only"></span></td>
-				<td data-col="1" data-row="{{ loop.index }}"class="highlightable">{{ performance.year }} <span class="sr-only"></span></td>
-				<td data-col="2" data-row="{{ loop.index }}"class="highlightable">{{ performance.revenue }} <span class="sr-only"></span></td>
-				<td><input type="checkbox" aria-labelledby="highlight_heading"></td>
+				<td>
+          <label for="cell-{{ loop.index }}-0">{{ loop.index }}</label>
+          <input id="cell-{{ loop.index }}-0" type="checkbox" data-row="{{ loop.index }}"class="highlightable sr-only"/>
+        </td>
+				<td>
+          <label for="cell-{{ loop.index }}-1">{{ performance.year }}</label>
+          <input id="cell-{{ loop.index }}-1" type="checkbox" data-col="1" data-row="{{ loop.index }}"class="highlightable sr-only"/>
+        </td>
+				<td>
+          <label for="cell-{{ loop.index }}-2">{{ performance.revenue }}</label>
+          <input id="cell-{{ loop.index }}-2" type="checkbox" data-col="2" data-row="{{ loop.index }}"class="highlightable sr-only"/>
+        </td>
 			</tr>
 		{% endfor %}
 	</tbody>

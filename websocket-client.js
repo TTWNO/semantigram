@@ -59,10 +59,7 @@ highlightSocket.onmessage = (event) => {
         log.innerHTML = text;
         highlightItems.forEach((item) => {
           item.classList.add(ElementState.HIGHLIGHTED);
-          let sr_text = item.querySelector(".sr-only");
-          if (sr_text) {
-            sr_text.innerHTML = "(selected)";
-          }
+          item.checked = true;
         });
     } else if (action === "unhighlight") {
         const text = `${coordinates} have been unselected\n`;
@@ -70,10 +67,7 @@ highlightSocket.onmessage = (event) => {
         log.innerHTML = text;
         highlightItems.forEach((item) => {
           item.classList.remove(ElementState.HIGHLIGHTED);
-          let sr_text = item.querySelector(".sr-only");
-          if (sr_text) {
-            sr_text.innerHTML = "";
-          }
+          item.checked = false;
         });
     }
 

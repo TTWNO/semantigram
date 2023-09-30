@@ -19,7 +19,7 @@ table td {
 	border: 1px solid black;
 }
 
-table .highlight {
+td:has(input:checked) {
   background-color: #ff8500;
 }
 
