@@ -2,8 +2,8 @@
 	width: 0;
 	height: 0;
 	position: absolute;
-	top: 100000px;
-	left: 100000px;
+	top: -100000px;
+	left: -100000px;
 }
 
 body {
