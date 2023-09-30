@@ -20,6 +20,7 @@ const highlight_element = (ev) => {
     coordinates = [parseInt(x_col)];
   }
   
+  console.log(JSON.stringify({position: {type: elementType, data: coordinates}, action: "highlight"}))
   highlightSocket.send(JSON.stringify({position: {type: elementType, data: coordinates}, action: "highlight"}))
 }
 
@@ -82,5 +83,5 @@ document.querySelectorAll("table td.highlightable")
 
 document.querySelectorAll("svg rect")
   .forEach((item) => {
-    item.addEventListener("click", highlight_svg_click)
+    item.addEventListener("click", highlight_element)
   })
