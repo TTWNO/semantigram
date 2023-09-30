@@ -23,3 +23,6 @@ svg .highlight[data-type="visual"] {
   fill: #ff8500;
 }
 
+svg .highlight[data-type="text"] {
+  fill: blue;
+}
