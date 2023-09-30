@@ -65,17 +65,7 @@ document.querySelectorAll('input[type="checkbox"]')
 		item.addEventListener("change", highlight_table_checkbox)
 	})
 
-document.querySelectorAll("table th")
-  .forEach((item) => {
-    item.addEventListener("click", highlight_element)
-  })
-
-document.querySelectorAll("table tbody tr")
-  .forEach((item) => {
-    item.addEventListener("click", highlight_element)
-  })
-
-document.querySelectorAll("table tbody td")
+document.querySelectorAll("[data-row][data-col]")
   .forEach((item) => {
     item.addEventListener("click", highlight_element)
   })
@@ -84,9 +74,4 @@ document.querySelectorAll("table td.highlightable")
   .forEach((item) => {
     item.addEventListener("focus", highlight_table_focus)
     item.addEventListener("click", highlight_table_focus)
-  })
-
-document.querySelectorAll("svg rect")
-  .forEach((item) => {
-    item.addEventListener("click", highlight_element)
   })
