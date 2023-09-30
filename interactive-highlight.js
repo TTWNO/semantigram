@@ -30,7 +30,6 @@ const highlight_element = (ev) => {
 }
 
 const highlight_table_checkbox = (ev) => {
-	ev.target.checked = !ev.target.checked;
   let action = "highlight"
   let clickedItem = ev.target;
   item = clickedItem.parentElement.parentElement;
@@ -38,8 +37,8 @@ const highlight_table_checkbox = (ev) => {
   const index = item.id.replace('table-', '');
 
   highlightSocket.send(JSON.stringify({index: Number(index), action: action}));
-	ev.preventDefault();
 	ev.stopPropagation();
+
 	return false;
 }
 
@@ -62,7 +61,7 @@ const highlight_svg_click = (ev) => {
 
 document.querySelectorAll('input[type="checkbox"]')
 	.forEach((item) => {
-		item.addEventListener("change", highlight_table_checkbox)
+		item.addEventListener("click", highlight_table_checkbox)
 	})
 
 document.querySelectorAll("[data-row][data-col]")
