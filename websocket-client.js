@@ -6,8 +6,11 @@ const ElementState = Object.freeze({
     HOVERED: "hovered",
     NONE: "",
 });
+const Action = Object.freeze({
+    HIGHLIGHT: "highlight",
+    UNHIGHLIGHT: "unhighlight",
+})
 
-const fromTo = { 'table': 'bar', 'bar': 'table' };
 const websocketServer = ws_proto + "://" + hostname + "/ws";
 console.log("Connect to ", websocketServer);
 
@@ -53,7 +56,7 @@ highlightSocket.onmessage = (event) => {
       console.log(highlightItems);
 
     const log = document.querySelector("#a11y-log");
-    if (action === "highlight") {
+    if (action === Action.HIGHLIGHT) {
         const text = `${coordinates} have been selected\n`;
         console.log(text);
         log.innerHTML = text;
@@ -61,7 +64,7 @@ highlightSocket.onmessage = (event) => {
           item.classList.add(ElementState.HIGHLIGHTED);
           item.checked = true;
         });
-    } else if (action === "unhighlight") {
+    } else if (action === Action.UNHIGHLIGHT) {
         const text = `${coordinates} have been unselected\n`;
         console.log(text);
         log.innerHTML = text;
@@ -71,8 +74,4 @@ highlightSocket.onmessage = (event) => {
         });
     }
 
-};
-
-function highlightItem(index, highlight) {
-    highlightSocket.send(`{"index": ${index}, "action": ${ElementState.HIGHLIGHTED}}`);
 };
