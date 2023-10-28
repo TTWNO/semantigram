@@ -9,363 +9,241 @@
 <body>
 	
 <table>
-	<caption>Revenue by Year</caption>
+	<caption>Binary Tree Data</caption>
 	<thead>
 		<tr>
-			<th data-col="0">Index</th>
-			<th data-col="1">Year</th>
-			<th data-col="2">Revenue</th>
+			<th data-col="0">ID</th>
+			<th data-col="1">Name</th>
+			<th data-col="2">Value</th>
+			<th data-col="2">Parent</th>
+			<th data-col="2">Direction</th>
 		</tr>
 	</thead>
 	<tbody>
 		
-			<tr>
-				<td>
-          <label for="cell-1-0">1</label>
-          <input id="cell-1-0" type="checkbox" data-row="1"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-1-1">2010</label>
-          <input id="cell-1-1" type="checkbox" data-col="1" data-row="1"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-1-2">20000</label>
-          <input id="cell-1-2" type="checkbox" data-col="2" data-row="1"class="highlightable sr-only"/>
-        </td>
-			</tr>
+		<tr>
+			<!-- ID -->
+			<td>
+				<label for="cell-1-0">1</label>
+				<input id="cell-1-0" type="checkbox" data-row="1" class="highlightable sr-only" />
+			</td>
+			<!-- Name -->
+			<td>
+				<label for="cell-1-1">root</label>
+				<input id="cell-1-1" type="checkbox" data-col="1" data-row="1" class="highlightable sr-only" />
+			</td>
+			<!-- Value -->
+			<td>
+				<label for="cell-1-2">1</label>
+				<input id="cell-1-2" type="checkbox" data-col="2" data-row="1" class="highlightable sr-only" />
+			</td>
+			<!-- Parent -->
+			<td>
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+			</td>
+		</tr>
 		
-			<tr>
-				<td>
-          <label for="cell-2-0">2</label>
-          <input id="cell-2-0" type="checkbox" data-row="2"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-2-1">2011</label>
-          <input id="cell-2-1" type="checkbox" data-col="1" data-row="2"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-2-2">24000</label>
-          <input id="cell-2-2" type="checkbox" data-col="2" data-row="2"class="highlightable sr-only"/>
-        </td>
-			</tr>
+		<tr>
+			<!-- ID -->
+			<td>
+				<label for="cell-2-0">2</label>
+				<input id="cell-2-0" type="checkbox" data-row="2" class="highlightable sr-only" />
+			</td>
+			<!-- Name -->
+			<td>
+				<label for="cell-2-1">T1</label>
+				<input id="cell-2-1" type="checkbox" data-col="1" data-row="2" class="highlightable sr-only" />
+			</td>
+			<!-- Value -->
+			<td>
+				<label for="cell-2-2">2</label>
+				<input id="cell-2-2" type="checkbox" data-col="2" data-row="2" class="highlightable sr-only" />
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<label for="cell-2-3">1</label>
+				<input id="cell-2-3" type="checkbox" data-col="3" data-row="2" class="highlightable sr-only" />
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<label for="cell-2-4">left</label>
+				<input id="cell-2-4" type="checkbox" data-col="4" data-row="2" class="highlightable sr-only" />
+				
+			</td>
+		</tr>
 		
-			<tr>
-				<td>
-          <label for="cell-3-0">3</label>
-          <input id="cell-3-0" type="checkbox" data-row="3"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-3-1">2012</label>
-          <input id="cell-3-1" type="checkbox" data-col="1" data-row="3"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-3-2">15000</label>
-          <input id="cell-3-2" type="checkbox" data-col="2" data-row="3"class="highlightable sr-only"/>
-        </td>
-			</tr>
+		<tr>
+			<!-- ID -->
+			<td>
+				<label for="cell-3-0">3</label>
+				<input id="cell-3-0" type="checkbox" data-row="3" class="highlightable sr-only" />
+			</td>
+			<!-- Name -->
+			<td>
+				<label for="cell-3-1">T2</label>
+				<input id="cell-3-1" type="checkbox" data-col="1" data-row="3" class="highlightable sr-only" />
+			</td>
+			<!-- Value -->
+			<td>
+				<label for="cell-3-2">3</label>
+				<input id="cell-3-2" type="checkbox" data-col="2" data-row="3" class="highlightable sr-only" />
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<label for="cell-3-3">1</label>
+				<input id="cell-3-3" type="checkbox" data-col="3" data-row="3" class="highlightable sr-only" />
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<label for="cell-3-4">right</label>
+				<input id="cell-3-4" type="checkbox" data-col="4" data-row="3" class="highlightable sr-only" />
+				
+			</td>
+		</tr>
 		
-			<tr>
-				<td>
-          <label for="cell-4-0">4</label>
-          <input id="cell-4-0" type="checkbox" data-row="4"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-4-1">2013</label>
-          <input id="cell-4-1" type="checkbox" data-col="1" data-row="4"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-4-2">49000</label>
-          <input id="cell-4-2" type="checkbox" data-col="2" data-row="4"class="highlightable sr-only"/>
-        </td>
-			</tr>
+		<tr>
+			<!-- ID -->
+			<td>
+				<label for="cell-4-0">4</label>
+				<input id="cell-4-0" type="checkbox" data-row="4" class="highlightable sr-only" />
+			</td>
+			<!-- Name -->
+			<td>
+				<label for="cell-4-1">T3</label>
+				<input id="cell-4-1" type="checkbox" data-col="1" data-row="4" class="highlightable sr-only" />
+			</td>
+			<!-- Value -->
+			<td>
+				<label for="cell-4-2">4</label>
+				<input id="cell-4-2" type="checkbox" data-col="2" data-row="4" class="highlightable sr-only" />
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<label for="cell-4-3">2</label>
+				<input id="cell-4-3" type="checkbox" data-col="3" data-row="4" class="highlightable sr-only" />
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<label for="cell-4-4">right</label>
+				<input id="cell-4-4" type="checkbox" data-col="4" data-row="4" class="highlightable sr-only" />
+				
+			</td>
+		</tr>
 		
-			<tr>
-				<td>
-          <label for="cell-5-0">5</label>
-          <input id="cell-5-0" type="checkbox" data-row="5"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-5-1">2014</label>
-          <input id="cell-5-1" type="checkbox" data-col="1" data-row="5"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-5-2">29333</label>
-          <input id="cell-5-2" type="checkbox" data-col="2" data-row="5"class="highlightable sr-only"/>
-        </td>
-			</tr>
+		<tr>
+			<!-- ID -->
+			<td>
+				<label for="cell-5-0">5</label>
+				<input id="cell-5-0" type="checkbox" data-row="5" class="highlightable sr-only" />
+			</td>
+			<!-- Name -->
+			<td>
+				<label for="cell-5-1">T4</label>
+				<input id="cell-5-1" type="checkbox" data-col="1" data-row="5" class="highlightable sr-only" />
+			</td>
+			<!-- Value -->
+			<td>
+				<label for="cell-5-2">5</label>
+				<input id="cell-5-2" type="checkbox" data-col="2" data-row="5" class="highlightable sr-only" />
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<label for="cell-5-3">3</label>
+				<input id="cell-5-3" type="checkbox" data-col="3" data-row="5" class="highlightable sr-only" />
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<label for="cell-5-4">left</label>
+				<input id="cell-5-4" type="checkbox" data-col="4" data-row="5" class="highlightable sr-only" />
+				
+			</td>
+		</tr>
 		
-			<tr>
-				<td>
-          <label for="cell-6-0">6</label>
-          <input id="cell-6-0" type="checkbox" data-row="6"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-6-1">2015</label>
-          <input id="cell-6-1" type="checkbox" data-col="1" data-row="6"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-6-2">92555</label>
-          <input id="cell-6-2" type="checkbox" data-col="2" data-row="6"class="highlightable sr-only"/>
-        </td>
-			</tr>
+		<tr>
+			<!-- ID -->
+			<td>
+				<label for="cell-6-0">6</label>
+				<input id="cell-6-0" type="checkbox" data-row="6" class="highlightable sr-only" />
+			</td>
+			<!-- Name -->
+			<td>
+				<label for="cell-6-1">T5</label>
+				<input id="cell-6-1" type="checkbox" data-col="1" data-row="6" class="highlightable sr-only" />
+			</td>
+			<!-- Value -->
+			<td>
+				<label for="cell-6-2">6</label>
+				<input id="cell-6-2" type="checkbox" data-col="2" data-row="6" class="highlightable sr-only" />
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<label for="cell-6-3">3</label>
+				<input id="cell-6-3" type="checkbox" data-col="3" data-row="6" class="highlightable sr-only" />
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<label for="cell-6-4">right</label>
+				<input id="cell-6-4" type="checkbox" data-col="4" data-row="6" class="highlightable sr-only" />
+				
+			</td>
+		</tr>
 		
-			<tr>
-				<td>
-          <label for="cell-7-0">7</label>
-          <input id="cell-7-0" type="checkbox" data-row="7"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-7-1">2016</label>
-          <input id="cell-7-1" type="checkbox" data-col="1" data-row="7"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-7-2">12356</label>
-          <input id="cell-7-2" type="checkbox" data-col="2" data-row="7"class="highlightable sr-only"/>
-        </td>
-			</tr>
-		
-			<tr>
-				<td>
-          <label for="cell-8-0">8</label>
-          <input id="cell-8-0" type="checkbox" data-row="8"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-8-1">2017</label>
-          <input id="cell-8-1" type="checkbox" data-col="1" data-row="8"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-8-2">25352</label>
-          <input id="cell-8-2" type="checkbox" data-col="2" data-row="8"class="highlightable sr-only"/>
-        </td>
-			</tr>
-		
-			<tr>
-				<td>
-          <label for="cell-9-0">9</label>
-          <input id="cell-9-0" type="checkbox" data-row="9"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-9-1">2018</label>
-          <input id="cell-9-1" type="checkbox" data-col="1" data-row="9"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-9-2">92562</label>
-          <input id="cell-9-2" type="checkbox" data-col="2" data-row="9"class="highlightable sr-only"/>
-        </td>
-			</tr>
-		
-			<tr>
-				<td>
-          <label for="cell-10-0">10</label>
-          <input id="cell-10-0" type="checkbox" data-row="10"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-10-1">2019</label>
-          <input id="cell-10-1" type="checkbox" data-col="1" data-row="10"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-10-2">12593</label>
-          <input id="cell-10-2" type="checkbox" data-col="2" data-row="10"class="highlightable sr-only"/>
-        </td>
-			</tr>
-		
-			<tr>
-				<td>
-          <label for="cell-11-0">11</label>
-          <input id="cell-11-0" type="checkbox" data-row="11"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-11-1">2020</label>
-          <input id="cell-11-1" type="checkbox" data-col="1" data-row="11"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-11-2">18000</label>
-          <input id="cell-11-2" type="checkbox" data-col="2" data-row="11"class="highlightable sr-only"/>
-        </td>
-			</tr>
-		
-			<tr>
-				<td>
-          <label for="cell-12-0">12</label>
-          <input id="cell-12-0" type="checkbox" data-row="12"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-12-1">2021</label>
-          <input id="cell-12-1" type="checkbox" data-col="1" data-row="12"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-12-2">12000</label>
-          <input id="cell-12-2" type="checkbox" data-col="2" data-row="12"class="highlightable sr-only"/>
-        </td>
-			</tr>
-		
-			<tr>
-				<td>
-          <label for="cell-13-0">13</label>
-          <input id="cell-13-0" type="checkbox" data-row="13"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-13-1">2022</label>
-          <input id="cell-13-1" type="checkbox" data-col="1" data-row="13"class="highlightable sr-only"/>
-        </td>
-				<td>
-          <label for="cell-13-2">25533</label>
-          <input id="cell-13-2" type="checkbox" data-col="2" data-row="13"class="highlightable sr-only"/>
-        </td>
-			</tr>
+		<tr>
+			<!-- ID -->
+			<td>
+				<label for="cell-7-0">7</label>
+				<input id="cell-7-0" type="checkbox" data-row="7" class="highlightable sr-only" />
+			</td>
+			<!-- Name -->
+			<td>
+				<label for="cell-7-1">T6</label>
+				<input id="cell-7-1" type="checkbox" data-col="1" data-row="7" class="highlightable sr-only" />
+			</td>
+			<!-- Value -->
+			<td>
+				<label for="cell-7-2">7</label>
+				<input id="cell-7-2" type="checkbox" data-col="2" data-row="7" class="highlightable sr-only" />
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<label for="cell-7-3">6</label>
+				<input id="cell-7-3" type="checkbox" data-col="3" data-row="7" class="highlightable sr-only" />
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<label for="cell-7-4">left</label>
+				<input id="cell-7-4" type="checkbox" data-col="4" data-row="7" class="highlightable sr-only" />
+				
+			</td>
+		</tr>
 		
 	</tbody>
 </table>
 <!-- a place to render updates -->
-<textarea editable="false" role="log" id="a11y-log" class="sr-only" aria-live="polite" aria-atomic="false"></textarea>
-<hr/>
-<svg width="1000" height="1000">
-	<rect id="background" x="0" y="0" width="1000" height="1000" fill="white"></rect>
-	
-		
-		
-		
-		
-		
-    <g data-row="1">
-      <rect data-type="visual" data-col="2" data-row="1" id="bar-1" x="0" y="809" width="50" height="216.0713899872518" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="1" x="0" y="834">20000</text>
-      <text data-type="text" data-row="1" data-col="1" x="0" y="995.0713899872517">2010</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="2">
-      <rect data-type="visual" data-col="2" data-row="2" id="bar-2" x="75" y="766" width="50" height="259.2856679847022" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="2" x="75" y="791">24000</text>
-      <text data-type="text" data-row="2" data-col="1" x="75" y="995.2856679847023">2011</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="3">
-      <rect data-type="visual" data-col="2" data-row="3" id="bar-3" x="150" y="863" width="50" height="162.05354249043884" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="3" x="150" y="888">15000</text>
-      <text data-type="text" data-row="3" data-col="1" x="150" y="995.0535424904388">2012</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="4">
-      <rect data-type="visual" data-col="2" data-row="4" id="bar-4" x="225" y="496" width="50" height="529.3749054687669" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="4" x="225" y="521">49000</text>
-      <text data-type="text" data-row="4" data-col="1" x="225" y="995.3749054687669">2013</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="5">
-      <rect data-type="visual" data-col="2" data-row="5" id="bar-5" x="300" y="708" width="50" height="316.9011041248028" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="5" x="300" y="733">29333</text>
-      <text data-type="text" data-row="5" data-col="1" x="300" y="994.9011041248027">2014</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="6">
-      <rect data-type="visual" data-col="2" data-row="6" id="bar-6" x="375" y="25" width="50" height="999.9243750135045" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="6" x="375" y="50">92555</text>
-      <text data-type="text" data-row="6" data-col="1" x="375" y="994.9243750135045">2015</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="7">
-      <rect data-type="visual" data-col="2" data-row="7" id="bar-7" x="450" y="892" width="50" height="133.48890473412413" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="7" x="450" y="917">12356</text>
-      <text data-type="text" data-row="7" data-col="1" x="450" y="995.4889047341242">2016</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="8">
-      <rect data-type="visual" data-col="2" data-row="8" id="bar-8" x="525" y="751" width="50" height="273.89209394784035" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="8" x="525" y="776">25352</text>
-      <text data-type="text" data-row="8" data-col="1" x="525" y="994.8920939478403">2017</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="9">
-      <rect data-type="visual" data-col="2" data-row="9" id="bar-9" x="600" y="25" width="50" height="1000" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="9" x="600" y="50">92562</text>
-      <text data-type="text" data-row="9" data-col="1" x="600" y="995">2018</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="10">
-      <rect data-type="visual" data-col="2" data-row="10" id="bar-10" x="675" y="889" width="50" height="136.04935070547307" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="10" x="675" y="914">12593</text>
-      <text data-type="text" data-row="10" data-col="1" x="675" y="995.049350705473">2019</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="11">
-      <rect data-type="visual" data-col="2" data-row="11" id="bar-11" x="750" y="831" width="50" height="194.4642509885266" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="11" x="750" y="856">18000</text>
-      <text data-type="text" data-row="11" data-col="1" x="750" y="995.4642509885266">2020</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="12">
-      <rect data-type="visual" data-col="2" data-row="12" id="bar-12" x="825" y="895" width="50" height="129.6428339923511" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="12" x="825" y="920">12000</text>
-      <text data-type="text" data-row="12" data-col="1" x="825" y="994.6428339923511">2021</text>
-    </g>
-	
-		
-		
-		
-		
-		
-    <g data-row="13">
-      <rect data-type="visual" data-col="2" data-row="13" id="bar-13" x="900" y="749" width="50" height="275.847540027225" fill="lightblue"></rect>
-      <text data-type="text" data-col="2" data-row="13" x="900" y="774">25533</text>
-      <text data-type="text" data-row="13" data-col="1" x="900" y="994.847540027225">2022</text>
-    </g>
-	
-</svg>
+<textarea editable="false" role="log" id="a11y-log" class="sr-only" aria-live="polite" aria-atomic="false"></textarea>
+<hr />
 
 </body>
 </html>

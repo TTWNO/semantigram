@@ -1,0 +1,49 @@
+<table>
+	<caption>{{ caption }}</caption>
+	<thead>
+		<tr>
+			<th data-col="0">ID</th>
+			<th data-col="1">Name</th>
+			<th data-col="2">Value</th>
+			<th data-col="2">Parent</th>
+			<th data-col="2">Direction</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for record in records %}
+		<tr>
+			<!-- ID -->
+			<td>
+				<label for="cell-{{ loop.index }}-0">{{ record.id }}</label>
+				<input id="cell-{{ loop.index }}-0" type="checkbox" data-row="{{ loop.index }}" class="highlightable sr-only" />
+			</td>
+			<!-- Name -->
+			<td>
+				<label for="cell-{{ loop.index }}-1">{{ record.name }}</label>
+				<input id="cell-{{ loop.index }}-1" type="checkbox" data-col="1" data-row="{{ loop.index }}" class="highlightable sr-only" />
+			</td>
+			<!-- Value -->
+			<td>
+				<label for="cell-{{ loop.index }}-2">{{ record.value }}</label>
+				<input id="cell-{{ loop.index }}-2" type="checkbox" data-col="2" data-row="{{ loop.index }}" class="highlightable sr-only" />
+			</td>
+			<!-- Parent -->
+			<td>
+				{% if record.parent.is_some() %}
+				<label for="cell-{{ loop.index }}-3">{{ record.parent.as_ref().unwrap() }}</label>
+				<input id="cell-{{ loop.index }}-3" type="checkbox" data-col="3" data-row="{{ loop.index }}" class="highlightable sr-only" />
+				{% endif %}
+			</td>
+			<!-- Direction -->
+			<td>
+				{% if record.direction.is_some() %}
+				<label for="cell-{{ loop.index }}-4">{{ record.direction.as_ref().unwrap() }}</label>
+				<input id="cell-{{ loop.index }}-4" type="checkbox" data-col="4" data-row="{{ loop.index }}" class="highlightable sr-only" />
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<!-- a place to render updates -->
+<textarea editable="false" role="log" id="a11y-log" class="sr-only" aria-live="polite" aria-atomic="false"></textarea>

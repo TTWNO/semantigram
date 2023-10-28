@@ -23,6 +23,13 @@ pub struct SvgTemplate {
     pub records: Vec<Record>,
 }
 
+#[derive(Clone, Debug, Template)]
+#[template(path = "partials/binary-table.html")]
+pub struct HtmlBinaryTableTemplate {
+    records: Vec<BinaryTreeRecord>,
+    caption: String,
+}
+
 mod filters {
     pub fn default<T: std::fmt::Display>(ot: Option<T>, default: String) -> ::askama::Result<String> {
       Ok(match ot {
@@ -49,8 +56,7 @@ mod filters {
 #[derive(Clone, Debug, Template)]
 #[template(path = "alpha.html")]
 pub struct AlphaTemplate {
-    pub svg: SvgTemplate,
-    pub table: HtmlTableTemplate,
+    pub table: HtmlBinaryTableTemplate,
 }
 
 // TODO: replace with generic "dataframe"-like structure.
@@ -97,53 +103,86 @@ impl BinaryTree {
   }
 }
 
-fn table_data() -> Result<(), Box<dyn Error>>{
-    let file = File::open("../data.csv")?;
-    let reader = BufReader::new(file);
-    let mut rdr = Reader::from_reader(reader);
-    let mut all_rows = Vec::new();
-    for result in rdr.deserialize() {
-        let record: Record = result?;
-        all_rows.push(record);
-    }
+// fn table_data() -> Result<(), Box<dyn Error>>{
+//     let file = File::open("../data.csv")?;
+//     let reader = BufReader::new(file);
+//     let mut rdr = Reader::from_reader(reader);
+//     let mut all_rows = Vec::new();
+//     for result in rdr.deserialize() {
+//         let record: Record = result?;
+//         all_rows.push(record);
+//     }
 
-    let table = HtmlTableTemplate {
-        records: all_rows.clone(),
-        caption: "Revenue by Year".to_string(),
-    };
-    let largest_value = all_rows
-        .iter()
-        .max_by_key(|r| r.revenue)
-        .unwrap()
-        .revenue
-        .clone()
-        .into();
-    let svg = SvgTemplate {
-        records: all_rows,
-        x_axis_size: 1000.into(),
-        y_axis_size: 1000.into(),
-        x_width: 50.into(),
-        padding: 25.into(),
-        outline_color: "none".to_string(),
-        fill_color: "lightblue".to_string(),
-        largest_value,
-    };
-    let alpha = AlphaTemplate { svg, table };
+//     let table = HtmlTableTemplate {
+//         records: all_rows.clone(),
+//         caption: "Revenue by Year".to_string(),
+//     };
+//     let largest_value = all_rows
+//         .iter()
+//         .max_by_key(|r| r.revenue)
+//         .unwrap()
+//         .revenue
+//         .clone()
+//         .into();
+//     let svg = SvgTemplate {
+//         records: all_rows,
+//         x_axis_size: 1000.into(),
+//         y_axis_size: 1000.into(),
+//         x_width: 50.into(),
+//         padding: 25.into(),
+//         outline_color: "none".to_string(),
+//         fill_color: "lightblue".to_string(),
+//         largest_value,
+//     };
+//     let alpha = AlphaTemplate { svg, table };
 
-    println!("{}", &alpha.render()?);
-    Ok(())
-}
+//     println!("{}", &alpha.render()?);
+//     Ok(())
+// }
 
 fn binary_tree_data() -> Result<(), Box<dyn Error>>{
     let file = File::open("../binary_data.csv")?;
     let reader = BufReader::new(file);
     let mut rdr = Reader::from_reader(reader);
     let mut all_rows = Vec::new();
+
     for result in rdr.deserialize() {
         let record: BinaryTreeRecord = result?;
         all_rows.push(record);
     }
-    println!("{:?}", all_rows);
+
+    // println!("{:?}", all_rows);
+    // let tree_nodes: SinfulBinaryTreeNode = all_rows.into();
+    // println!("{:?}", tree_nodes);
+
+    let table = HtmlBinaryTableTemplate {
+        records: all_rows.clone(),
+        caption: "Binary Tree Data".to_string(),
+    };
+
+    // let largest_value = all_rows
+    //     .iter()
+    //     .max_by_key(|r| r.revenue)
+    //     .unwrap()
+    //     .revenue
+    //     .clone()
+    //     .into();
+
+    // let svg = SvgTemplate {
+    //     records: all_rows,
+    //     x_axis_size: 1000.into(),
+    //     y_axis_size: 1000.into(),
+    //     x_width: 50.into(),
+    //     padding: 25.into(),
+    //     outline_color: "none".to_string(),
+    //     fill_color: "lightblue".to_string(),
+    //     largest_value,
+    // };
+
+    let alpha = AlphaTemplate { table };
+
+    println!("{}", &alpha.render()?);
+
     Ok(())
 }
 
