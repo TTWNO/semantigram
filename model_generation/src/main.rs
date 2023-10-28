@@ -101,6 +101,16 @@ impl BinaryTree {
   fn parent(&self, node: &BinaryTreeRecord) -> Option<BinaryTreeRecord> {
     self.0.clone().into_iter().find(|n| Some(n.id) == node.parent)
   }
+  fn depth(&self, node: &BinaryTreeRecord) -> i32 {
+    let mut depth = 0;
+    let mut try_parent = self.parent(node);
+    while try_parent.is_some() {
+      depth+=1;
+      try_parent = self.parent(&try_parent.unwrap());
+      println!("{:?}", try_parent);
+    }
+    depth
+  }
 }
 
 // fn table_data() -> Result<(), Box<dyn Error>>{
@@ -188,4 +198,31 @@ fn binary_tree_data() -> Result<(), Box<dyn Error>>{
 
 fn main() -> Result<(), Box<dyn Error>> {
   Ok(binary_tree_data()?)
+}
+
+
+#[cfg(test)]
+mod tests {
+  use crate::BinaryTree;
+  use crate::BinaryTreeRecord;
+  use csv::Reader;
+  use std::io::BufReader;
+  use std::fs::File;
+
+  #[test]
+  fn test_depth_calc(){
+    let file = File::open("../binary_data.csv").unwrap();
+    let reader = BufReader::new(file);
+    let mut rdr = Reader::from_reader(reader);
+    let mut all_rows = Vec::new();
+
+    for result in rdr.deserialize() {
+        let record: BinaryTreeRecord = result.unwrap();
+        all_rows.push(record);
+    }
+    let row_clone = all_rows.clone();
+    let last = row_clone.last().unwrap();
+    let tree = BinaryTree(all_rows);
+    assert_eq!(tree.depth(last), 3);
+  }
 }
