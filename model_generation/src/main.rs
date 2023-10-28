@@ -1,7 +1,7 @@
 use ::csv::Reader;
 use askama::Template;
 use serde::{Deserialize, Serialize};
-use std::{error::Error, fs::File, io::BufReader, collections::HashMap, sync::Arc};
+use std::{error::Error, fs::File, io::BufReader, collections::HashMap, collections::VecDeque, sync::Arc};
 
 #[derive(Clone, Debug, Template)]
 #[template(path = "partials/table.html")]
@@ -28,6 +28,12 @@ pub struct SvgTemplate {
 pub struct HtmlBinaryTableTemplate {
     records: Vec<BinaryTreeRecord>,
     caption: String,
+}
+
+#[derive(Clone, Debug, Template)]
+#[template(path = "partials/binary/binary_tree_html_nested_list.html")]
+pub struct HtmlNestedBinaryTableTemplate {
+  pub tree: BinaryTree,
 }
 
 mod filters {
@@ -92,6 +98,7 @@ pub struct BinaryTreeRecord {
   pub direction: Option<Direction>,
 }
 
+#[derive(Clone, Serialize, Deserialize, Debug)]
 struct BinaryTree(Vec<BinaryTreeRecord>);
 
 impl BinaryTree {
@@ -110,6 +117,38 @@ impl BinaryTree {
     }
     depth
   }
+  fn has_ancestor(&self, node: &BinaryTreeRecord, ancestor: &BinaryTreeRecord) -> bool {
+    let mut parent = node;
+    while let Some(parent) = self.parent(parent) {
+      if parent.id == ancestor.id {
+        return true;
+      }
+    }
+    false
+  }
+  fn subtree(&self, node: &BinaryTreeRecord) -> Self {
+    BinaryTree(self.0.clone().into_iter()
+      .filter(|r| self.has_ancestor(node, r))
+      .collect())
+  }
+}
+impl IntoNestedList for BinaryTree {
+  fn to_html(&self) -> String {
+    let root = self.0.first().expect("Does not have a root node!");
+    let mut stack = VecDeque::new();
+    let child_wrap = self.children(root);
+    child_wrap.0
+      .iter()
+      .for_each(|c| stack.push_back(c));
+    while let Some(item) = stack.pop_front() {
+      
+    }
+    String::new()
+  }
+}
+
+trait IntoNestedList {
+  fn to_html(&self) -> String;
 }
 
 // fn table_data() -> Result<(), Box<dyn Error>>{
