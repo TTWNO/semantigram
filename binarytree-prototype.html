@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="websocket-client.js"></script> 
+	<script defer src="interactive-highlight.js"></script>
+	<link rel="stylesheet" href="main.css"/>
+	<meta charset="UTF-8"/>
+</head>
+<body>
+
 <pre>
     1
  /     \  
@@ -8,21 +18,51 @@
           7   
 </pre>
 
-<span id="1">1</span> <input aria-labelledby="1" type="checkbox" />
+<span id="1" data-id="1">1</span>
 <ul id="binary-tree" class="tree root-level" role="tree" aria-labelledby="1">
-    <li id="2" class="tree-parent left" role="treeitem" aria-expanded="true"><span id="2-label">2</span> <input aria-labelledby="2-label" type="checkbox" />
+    <li id="2" class="tree-parent left" role="treeitem" aria-expanded="true"><span id="2-label" data-id="2">2</span><span data-parent-id="1" data-child-id="2">(left)</span>
         <ul id="2-children" role="group">
-            <li id="4" class="right" role="treeitem" aria-expanded="true"><span id="4-label">4</span> <input aria-labelledby="4-label" type="checkbox" /></li>
+            <li id="4" class="right" role="treeitem" aria-expanded="true"><span id="4-label" data-id="4">4</span><span data-parent-id="2" data-child-id="4">(right)</span>
         </ul>
     </li>
-    <li id="3" class="tree-parent right" role="treeitem" aria-expanded="true"><span id="3-label">3</span> <input aria-labelledby="3-label" type="checkbox" />
+    <li id="3" class="tree-parent right" role="treeitem" aria-expanded="true"><span id="3-label" data-id="3">3</span><span data-parent-id="1" data-child-id="3">(right)</span>
         <ul id="3-children" role="group">
-            <li id="5" class="left" role="treeitem" aria-expanded="true"><span id="5-label">5</span> <input aria-labelledby="5-label" type="checkbox" /></li>
-            <li id="6" class="tree-parent right" role="treeitem" aria-expanded="true"><span id="6-label">6</span> <input aria-labelledby="6-label" type="checkbox" />
+            <li id="5" class="left" role="treeitem" aria-expanded="true"><span id="5-label" data-id="5">5</span><span data-parent-id="3" data-child-id="5">(left)</span>
+            <li id="6" class="tree-parent right" role="treeitem" aria-expanded="true"><span id="6-label" data-id="6">6</span><span data-parent-id="3" data-child-id="6">(right)</span>
                 <ul id="6-children" role="group">
-                    <li id="7" class="left" role="treeitem"  aria-expanded="true"><span id="7-label">7</span> <input aria-labelledby="7-label" type="checkbox" /></li>
+                    <li id="7" class="left" role="treeitem"  aria-expanded="true"><span id="7-label" data-id="7">7</span><span data-parent-id="6" data-child-id="7">(right)</span>
                 </ul>
             </li>
         </ul>
     </li>
 </ul>
+
+<!-- a place to render updates -->
+<textarea editable="false" role="log" id="a11y-log" class="sr-only" aria-live="polite" aria-atomic="false"></textarea>
+
+<svg width="1000" height="1000">
+    <rect id="background" x="0" y="0" width="1000" height="1000" fill="white"></rect>
+
+    <text data-id="1" data-type="text" x="450" y="20">1</text>
+
+    <line data-parent-id="1" data-child-id="2" data-type="visual" x1="450" y1="22" x2="400" y2="45" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+    <text data-id="2" data-type="text" x="400" y="60">2</text>
+
+    <line data-parent-id="1" data-child-id="3" data-type="visual" x1="450" y1="22" x2="500" y2="45" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+    <text data-id="3" data-type="text" x="500" y="60">3</text>
+
+    <line data-parent-id="2" data-child-id="4" data-type="visual" x1="400" y1="62" x2="425" y2="85" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+    <text data-id="4" data-type="text" x="425" y="100">4</text>
+
+    <line data-parent-id="3" data-child-id="5" data-type="visual" x1="500" y1="62" x2="475" y2="85" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+    <text data-id="5" data-type="text" x="475" y="100">5</text>
+
+    <line data-parent-id="3" data-child-id="6" data-type="visual" x1="500" y1="62" x2="525" y2="85" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+    <text data-id="6" data-type="text" x="525" y="100">6</text>
+
+    <line data-parent-id="6" data-child-id="7" data-type="visual" x1="525" y1="102" x2="512" y2="125" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+    <text data-id="7" data-type="text" x="512" y="140">7</text>
+</svg>
+
+</body>
+</html>

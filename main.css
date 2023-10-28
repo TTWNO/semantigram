@@ -25,6 +25,7 @@ td:has(input:checked) {
 
 svg .highlight[data-type="visual"] {
   fill: #ff8500;
+  stroke: #ff8500 !important;
 }
 
 svg .highlight[data-type="text"] {

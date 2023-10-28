@@ -32,6 +32,8 @@ enum Position {
   Cell((i32, i32)),
   Column((i32,)),
   Row((i32,)),
+  Node((i32,)),
+  Link((i32,i32,)),
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
