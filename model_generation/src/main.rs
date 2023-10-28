@@ -68,9 +68,27 @@ pub struct BinaryTreeRecord {
   pub id: i32,
   pub name: String,
   pub value: String,
-  pub parent: i32,
-  pub direction: Direction,
+  pub parent: Option<i32>,
+  pub direction: Option<Direction>,
 }
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct SinfulBinaryTreeNode {
+  pub parent: Option<Box<SinfulBinaryTreeNode>>,
+  pub left: Option<Box<SinfulBinaryTreeNode>>,
+  pub right: Option<Box<SinfulBinaryTreeNode>>,
+  pub id: i32,
+  pub direction: Option<Direction>,
+  pub name: String,
+  pub value: String,
+}
+
+impl From<Vec<BinaryTreeRecord>> for SinfulBinaryTreeNode {
+    fn from(records: Vec<BinaryTreeRecord>) -> Self {
+        todo!()
+    }
+}
+
 
 fn table_data() -> Result<(), Box<dyn Error>>{
     let file = File::open("../data.csv")?;
@@ -118,6 +136,9 @@ fn binary_tree_data() -> Result<(), Box<dyn Error>>{
         let record: BinaryTreeRecord = result?;
         all_rows.push(record);
     }
+    println!("{:?}", all_rows);
+    let tree_nodes: SinfulBinaryTreeNode = all_rows.into();
+    println!("{:?}", tree_nodes);
 
     /*
     let table = HtmlTableTemplate {
