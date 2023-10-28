@@ -139,9 +139,10 @@ impl IntoNestedList for BinaryTree {
     let child_wrap = self.children(root);
     child_wrap.0
       .iter()
-      .for_each(|c| stack.push_back(c));
+      .for_each(|c| stack.push_front(c));
     while let Some(item) = stack.pop_front() {
-      
+      let children = self.children(item).0;
+      // TODO: add children to stack, then create HTML output
     }
     String::new()
   }
