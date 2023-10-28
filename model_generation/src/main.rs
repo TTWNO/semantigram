@@ -107,7 +107,6 @@ impl BinaryTree {
     while try_parent.is_some() {
       depth+=1;
       try_parent = self.parent(&try_parent.unwrap());
-      println!("{:?}", try_parent);
     }
     depth
   }
