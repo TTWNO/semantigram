@@ -1,7 +1,7 @@
 use ::csv::Reader;
 use askama::Template;
 use serde::{Deserialize, Serialize};
-use std::{error::Error, fs::File, io::BufReader};
+use std::{error::Error, fs::File, io::BufReader, collections::HashMap};
 
 #[derive(Clone, Debug, Template)]
 #[template(path = "partials/table.html")]
@@ -56,11 +56,19 @@ pub struct Record {
     pub revenue: i32,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Copy)]
 #[serde(rename_all="lowercase")]
 pub enum Direction {
   Left,
   Right,
+}
+impl std::fmt::Display for Direction {
+  fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+    match self {
+      Self::Left => write!(f, "left"),
+      Self::Right => write!(f, "right"),
+    }
+  }
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -83,12 +91,32 @@ pub struct SinfulBinaryTreeNode {
   pub value: String,
 }
 
-impl From<Vec<BinaryTreeRecord>> for SinfulBinaryTreeNode {
-    fn from(records: Vec<BinaryTreeRecord>) -> Self {
-        todo!()
-    }
+/// Returns SinfulBinaryTreeNode with set chilren for "root" node.
+fn find_children_that_match_parent(root: BinaryTreeRecord, all_nodes: Vec<BinaryTreeRecord>) -> SinfulBinaryTreeNode {
+  todo!()
 }
 
+impl From<Vec<BinaryTreeRecord>> for SinfulBinaryTreeNode {
+  fn from(records: Vec<BinaryTreeRecord>) -> Self {
+    let map = from_tree_record_to_map(&records);
+    todo!()
+  }
+}
+
+fn from_tree_record_to_map(records: &Vec<BinaryTreeRecord>) -> HashMap<i32, SinfulBinaryTreeNode> {
+    records
+      .into_iter()
+      .map(|rec| (rec.id, SinfulBinaryTreeNode {
+          parent: None,
+          left: None,
+          right: None,
+          id: rec.id,
+          direction: rec.direction,
+          name: rec.name.clone(),
+          value: rec.value.clone(),
+      }))
+      .collect()
+}
 
 fn table_data() -> Result<(), Box<dyn Error>>{
     let file = File::open("../data.csv")?;
