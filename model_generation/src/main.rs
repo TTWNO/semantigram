@@ -1,5 +1,3 @@
-#![feature(get_mut_unchecked)]
-
 use ::csv::Reader;
 use askama::Template;
 use serde::{Deserialize, Serialize};
