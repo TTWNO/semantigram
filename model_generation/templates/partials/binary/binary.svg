@@ -1,25 +1,22 @@
 <svg width="1000" height="1000">
     <rect id="background" x="0" y="0" width="1000" height="1000" fill="white"></rect>
-    {% set start_x = 500 %}
-    {% set start_y = 20 %}
-    {% set h_gap = 50 %}
-    {% set v_gap = 40 %}
-    {% set parent_x = 0 %}
-    {% set parent_y = 0 %}
+
+    {% set node = root_node %}
+    {% set parent_x = start_x %}
+
+    <text data-id="{{ root_node.id }}" x="{{ start_x }}" y="{{ start_y }}">{{ root_node.value }}</text>
 
     {% for record in records %}
-        {% set x = start_x + ((h_gap/(level-1))*direction) %}
-        {% set y = start_y + (v_gap*level) %}
+        {% if record.direction = "left" set direction = -1 else direction = 1 %}
+        {% set x = parent_x + ((h_gap/(record.depth()))*direction) %}
+        {% set y = start_y + (v_gap*(record.depht())) %}
         {% set x1 = parent_x %}
         {% set x2 = x %}
-        {% set y1 = parent_y + 2 %}
-        {% set y2 = y - 10 %}
+        {% set y1 = (start_y * level) + 2 %}
+        {% set y2 = y - 15 %}
         {% set parent_x = x %}
-        {% set parent_y = y %}
 
-        <g>
-            <line data-parent-id="{{ record.parent.id }}" data-children-id="{{ record.id }}" x1="{{ x1 }}" y1="{{ y1 }}" x2="{{ x2 }}" y2="{{ y2 }}"></line>
-            <text data-id="{{ record.id }}" x="{{ x }}" y="{{ y }}">{{ record.value }}</text>
-        </g>
+        <line data-parent-id="{{ record.parent().id }}" data-child-id="{{ record.id }}" x1="{{ x1 }}" y1="{{ y1 }}" x2="{{ x2 }}" y2="{{ y2 }}"></line>
+        <text data-id="{{ record.id }}" x="{{ x }}" y="{{ y }}">{{ record.value }}</text>
     {% endfor %}
 </svg>

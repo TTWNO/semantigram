@@ -68,7 +68,7 @@ pub struct Record {
     pub revenue: i32,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, Copy)]
+#[derive(Clone, Debug, Serialize, Deserialize, Copy, PartialEq)]
 #[serde(rename_all="lowercase")]
 pub enum Direction {
   Left,
@@ -100,6 +100,22 @@ impl BinaryTree {
   }
   fn parent(&self, node: &BinaryTreeRecord) -> Option<BinaryTreeRecord> {
     self.0.clone().into_iter().find(|n| Some(n.id) == node.parent)
+  }
+  fn x_shifting(&self, node: &BinaryTreeRecord) -> f32 {
+    let mut x_shift = 0.0;
+    let mut try_parent = self.parent(node);
+    while try_parent.is_some() {
+      let parent_node = try_parent.unwrap();
+      if parent_node.direction == Some(Direction::Left) {
+        x_shift += 1.0 / self.depth(&parent_node) as f32;
+      } else {
+        x_shift -= 1.0 / self.depth(&parent_node) as f32;
+      }
+
+      try_parent = self.parent(&parent_node)
+    }
+
+    x_shift
   }
   fn depth(&self, node: &BinaryTreeRecord) -> i32 {
     let mut depth = 0;
@@ -224,5 +240,22 @@ mod tests {
     let last = row_clone.last().unwrap();
     let tree = BinaryTree(all_rows);
     assert_eq!(tree.depth(last), 3);
+  }
+
+  #[test]
+  fn test_x_shift(){
+    let file = File::open("../binary_data.csv").unwrap();
+    let reader = BufReader::new(file);
+    let mut rdr = Reader::from_reader(reader);
+    let mut all_rows = Vec::new();
+
+    for result in rdr.deserialize() {
+        let record: BinaryTreeRecord = result.unwrap();
+        all_rows.push(record);
+    }
+    let row_clone = all_rows.clone();
+    let last = row_clone.last().unwrap();
+    let tree = BinaryTree(all_rows);
+    assert_eq!(tree.x_shifting(last), 1.5);
   }
 }
