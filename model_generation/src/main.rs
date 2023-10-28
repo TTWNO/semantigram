@@ -1,7 +1,9 @@
+#![feature(get_mut_unchecked)]
+
 use ::csv::Reader;
 use askama::Template;
 use serde::{Deserialize, Serialize};
-use std::{error::Error, fs::File, io::BufReader, collections::HashMap};
+use std::{error::Error, fs::File, io::BufReader, collections::HashMap, sync::Arc};
 
 #[derive(Clone, Debug, Template)]
 #[template(path = "partials/table.html")]
@@ -86,49 +88,15 @@ pub struct BinaryTreeRecord {
   pub direction: Option<Direction>,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct SinfulBinaryTreeNode {
-  pub parent: Option<Box<SinfulBinaryTreeNode>>,
-  pub parent_id: Option<i32>,
-  pub left: Option<Box<SinfulBinaryTreeNode>>,
-  pub right: Option<Box<SinfulBinaryTreeNode>>,
-  pub id: i32,
-  pub direction: Option<Direction>,
-  pub name: String,
-  pub value: String,
-}
+struct BinaryTree(Vec<BinaryTreeRecord>);
 
-fn create_parents(map: &mut HashMap<i32, SinfulBinaryTreeNode>) {
-/*
-  for node in map {
-    let parent = map.values()
-      .find(|n| n.id == node.parent_id);
-    
+impl BinaryTree {
+  fn children(&self, node: &BinaryTreeRecord) -> Self {
+    BinaryTree(self.0.clone().into_iter().filter(|n| n.parent == Some(node.id)).collect())
   }
-*/
-}
-
-impl From<Vec<BinaryTreeRecord>> for SinfulBinaryTreeNode {
-  fn from(records: Vec<BinaryTreeRecord>) -> Self {
-    let map = from_tree_record_to_map(&records);
-    todo!();
+  fn parent(&self, node: &BinaryTreeRecord) -> Option<BinaryTreeRecord> {
+    self.0.clone().into_iter().find(|n| Some(n.id) == node.parent)
   }
-}
-
-fn from_tree_record_to_map(records: &Vec<BinaryTreeRecord>) -> HashMap<i32, SinfulBinaryTreeNode> {
-    records
-      .into_iter()
-      .map(|rec| (rec.id, SinfulBinaryTreeNode {
-          parent: None,
-          left: None,
-          right: None,
-          id: rec.id,
-          direction: rec.direction,
-          name: rec.name.clone(),
-          value: rec.value.clone(),
-          parent_id: rec.parent,
-      }))
-      .collect()
 }
 
 fn table_data() -> Result<(), Box<dyn Error>>{
@@ -178,35 +146,6 @@ fn binary_tree_data() -> Result<(), Box<dyn Error>>{
         all_rows.push(record);
     }
     println!("{:?}", all_rows);
-    let tree_nodes: SinfulBinaryTreeNode = all_rows.into();
-    println!("{:?}", tree_nodes);
-
-    /*
-    let table = HtmlTableTemplate {
-        records: all_rows.clone(),
-        caption: "Revenue by Year".to_string(),
-    };
-    let largest_value = all_rows
-        .iter()
-        .max_by_key(|r| r.revenue)
-        .unwrap()
-        .revenue
-        .clone()
-        .into();
-    let svg = SvgTemplate {
-        records: all_rows,
-        x_axis_size: 1000.into(),
-        y_axis_size: 1000.into(),
-        x_width: 50.into(),
-        padding: 25.into(),
-        outline_color: "none".to_string(),
-        fill_color: "lightblue".to_string(),
-        largest_value,
-    };
-    let alpha = AlphaTemplate { svg, table };
-
-    println!("{}", &alpha.render()?);
-  */
     Ok(())
 }
 
