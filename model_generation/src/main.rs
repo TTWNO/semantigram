@@ -56,7 +56,23 @@ pub struct Record {
     pub revenue: i32,
 }
 
-fn main() -> Result<(), Box<dyn Error>> {
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all="lowercase")]
+pub enum Direction {
+  Left,
+  Right,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct BinaryTreeRecord {
+  pub id: i32,
+  pub name: String,
+  pub value: String,
+  pub parent: i32,
+  pub direction: Direction,
+}
+
+fn table_data() -> Result<(), Box<dyn Error>>{
     let file = File::open("../data.csv")?;
     let reader = BufReader::new(file);
     let mut rdr = Reader::from_reader(reader);
@@ -91,4 +107,47 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     println!("{}", &alpha.render()?);
     Ok(())
+}
+
+fn binary_tree_data() -> Result<(), Box<dyn Error>>{
+    let file = File::open("../binary_data.csv")?;
+    let reader = BufReader::new(file);
+    let mut rdr = Reader::from_reader(reader);
+    let mut all_rows = Vec::new();
+    for result in rdr.deserialize() {
+        let record: BinaryTreeRecord = result?;
+        all_rows.push(record);
+    }
+
+    /*
+    let table = HtmlTableTemplate {
+        records: all_rows.clone(),
+        caption: "Revenue by Year".to_string(),
+    };
+    let largest_value = all_rows
+        .iter()
+        .max_by_key(|r| r.revenue)
+        .unwrap()
+        .revenue
+        .clone()
+        .into();
+    let svg = SvgTemplate {
+        records: all_rows,
+        x_axis_size: 1000.into(),
+        y_axis_size: 1000.into(),
+        x_width: 50.into(),
+        padding: 25.into(),
+        outline_color: "none".to_string(),
+        fill_color: "lightblue".to_string(),
+        largest_value,
+    };
+    let alpha = AlphaTemplate { svg, table };
+
+    println!("{}", &alpha.render()?);
+  */
+    Ok(())
+}
+
+fn main() -> Result<(), Box<dyn Error>> {
+  Ok(binary_tree_data()?)
 }
