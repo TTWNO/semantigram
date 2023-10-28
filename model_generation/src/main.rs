@@ -24,6 +24,12 @@ pub struct SvgTemplate {
 }
 
 mod filters {
+    pub fn default<T: std::fmt::Display>(ot: Option<T>, default: String) -> ::askama::Result<String> {
+      Ok(match ot {
+        Some(t) => t.to_string(),
+        None => default,
+      })
+    }
     pub fn to_i32<T>(idx: &T) -> ::askama::Result<i32>
     where
         i32: TryFrom<T>,
