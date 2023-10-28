@@ -26,7 +26,7 @@ pub struct SvgTemplate {
 mod filters {
     pub fn default<T: std::fmt::Display>(ot: Option<T>, default: String) -> ::askama::Result<String> {
       Ok(match ot {
-        Some(t) => t.to_string(),
+        Some(t) => format!("{t}"),
         None => default,
       })
     }
@@ -89,6 +89,7 @@ pub struct BinaryTreeRecord {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SinfulBinaryTreeNode {
   pub parent: Option<Box<SinfulBinaryTreeNode>>,
+  pub parent_id: Option<i32>,
   pub left: Option<Box<SinfulBinaryTreeNode>>,
   pub right: Option<Box<SinfulBinaryTreeNode>>,
   pub id: i32,
@@ -97,15 +98,20 @@ pub struct SinfulBinaryTreeNode {
   pub value: String,
 }
 
-/// Returns SinfulBinaryTreeNode with set chilren for "root" node.
-fn find_children_that_match_parent(root: BinaryTreeRecord, all_nodes: Vec<BinaryTreeRecord>) -> SinfulBinaryTreeNode {
-  todo!()
+fn create_parents(map: &mut HashMap<i32, SinfulBinaryTreeNode>) {
+/*
+  for node in map {
+    let parent = map.values()
+      .find(|n| n.id == node.parent_id);
+    
+  }
+*/
 }
 
 impl From<Vec<BinaryTreeRecord>> for SinfulBinaryTreeNode {
   fn from(records: Vec<BinaryTreeRecord>) -> Self {
     let map = from_tree_record_to_map(&records);
-    todo!()
+    todo!();
   }
 }
 
@@ -120,6 +126,7 @@ fn from_tree_record_to_map(records: &Vec<BinaryTreeRecord>) -> HashMap<i32, Sinf
           direction: rec.direction,
           name: rec.name.clone(),
           value: rec.value.clone(),
+          parent_id: rec.parent,
       }))
       .collect()
 }
