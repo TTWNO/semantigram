@@ -1,22 +1,29 @@
 <svg width="1000" height="1000">
     <rect id="background" x="0" y="0" width="1000" height="1000" fill="white"></rect>
 
-    {% set node = root_node %}
+    {% let root_node = tree.clone() %}
     {% set parent_x = start_x %}
 
+{#
     <text data-id="{{ root_node.id }}" x="{{ start_x }}" y="{{ start_y }}">{{ root_node.value }}</text>
 
-    {% for record in records %}
-        {% if record.direction = "left" set direction = -1 else direction = 1 %}
-        {% set x = parent_x + ((h_gap/(record.depth()))*direction) %}
-        {% set y = start_y + (v_gap*(record.depht())) %}
+    {% let child = root_node.children() %}
+    {% for child in tree %}
+        {% if child.direction == "left" -%}
+            {% let direction = -1 -%}
+        {% else -%}
+            {% let direction = 1 -%}
+        {% endif -%}
+        {% set x = parent_x + ((h_gap/(child.depth()))*direction) %}
+        {% set y = start_y + (v_gap*(child.depth())) %}
         {% set x1 = parent_x %}
         {% set x2 = x %}
-        {% set y1 = (start_y * level) + 2 %}
+        {% set y1 = (start_y * child.depth()) + 2 %}
         {% set y2 = y - 15 %}
         {% set parent_x = x %}
 
-        <line data-parent-id="{{ record.parent().id }}" data-child-id="{{ record.id }}" x1="{{ x1 }}" y1="{{ y1 }}" x2="{{ x2 }}" y2="{{ y2 }}"></line>
-        <text data-id="{{ record.id }}" x="{{ x }}" y="{{ y }}">{{ record.value }}</text>
+        <line data-parent-id="{{ child.parent().id }}" data-child-id="{{ child.id }}" x1="{{ x1 }}" y1="{{ y1 }}" x2="{{ x2 }}" y2="{{ y2 }}"></line>
+        <text data-id="{{ child.id }}" x="{{ x }}" y="{{ y }}">{{ child.value }}</text>
     {% endfor %}
+    #}
 </svg>

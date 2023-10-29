@@ -24,6 +24,17 @@ pub struct SvgTemplate {
 }
 
 #[derive(Clone, Debug, Template)]
+#[template(path = "partials/binary/binary.svg", escape = "none")]
+pub struct BinarySvgTemplate {
+  pub start_x: i32,
+  pub start_y: i32,
+  pub h_gap: i32,
+  pub v_gap: i32,
+  pub tree: BinaryTree,
+  pub records: Vec<BinaryTreeRecord>,
+}
+
+#[derive(Clone, Debug, Template)]
 #[template(path = "partials/binary-table.html")]
 pub struct HtmlBinaryTableTemplate {
     records: Vec<BinaryTreeRecord>,
@@ -63,6 +74,7 @@ mod filters {
 #[template(path = "alpha.html")]
 pub struct AlphaTemplate {
     pub table: HtmlBinaryTableTemplate,
+    pub svg: BinarySvgTemplate,
 }
 
 // TODO: replace with generic "dataframe"-like structure.
@@ -99,7 +111,7 @@ pub struct BinaryTreeRecord {
 }
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
-struct BinaryTree(Vec<BinaryTreeRecord>);
+pub struct BinaryTree(Vec<BinaryTreeRecord>);
 
 impl BinaryTree {
   fn children(&self, node: &BinaryTreeRecord) -> Self {
@@ -113,10 +125,13 @@ impl BinaryTree {
     let mut try_parent = self.parent(node);
     while try_parent.is_some() {
       let parent_node = try_parent.unwrap();
-      if parent_node.direction == Some(Direction::Left) {
-        x_shift += 1.0 / self.depth(&parent_node) as f32;
-      } else {
-        x_shift -= 1.0 / self.depth(&parent_node) as f32;
+      let depth = self.depth(&parent_node) as f32;
+      if depth != 0.0 {
+        if parent_node.direction == Some(Direction::Left) {
+          x_shift -= 1.0 / depth;
+        } else {
+          x_shift += 1.0 / depth;
+        }
       }
 
       try_parent = self.parent(&parent_node)
@@ -225,6 +240,15 @@ fn binary_tree_data() -> Result<(), Box<dyn Error>>{
         caption: "Binary Tree Data".to_string(),
     };
 
+    let svg = BinarySvgTemplate {
+      records: all_rows.clone(),
+      tree: BinaryTree(all_rows.clone()),
+      start_x: 500,
+      start_y: 20,
+      h_gap: 50,
+      v_gap: 40,
+    };
+
     // let largest_value = all_rows
     //     .iter()
     //     .max_by_key(|r| r.revenue)
@@ -244,7 +268,7 @@ fn binary_tree_data() -> Result<(), Box<dyn Error>>{
     //     largest_value,
     // };
 
-    let alpha = AlphaTemplate { table };
+    let alpha = AlphaTemplate { table, svg };
 
     println!("{}", &alpha.render()?);
 
