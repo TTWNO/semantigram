@@ -119,6 +119,15 @@ impl BinaryTree {
   fn parent(&self, node: &BinaryTreeRecord) -> Option<BinaryTreeRecord> {
     self.0.clone().into_iter().find(|n| Some(n.id) == node.parent)
   }
+  fn direction_to_i32(&self, node: &BinaryTreeRecord) -> i32 {
+    let mut i32direction = 0;
+    if node.direction == Some(Direction::Left) {
+      i32direction = -1
+    } else if node.direction == Some(Direction::Right) {
+      i32direction = 1
+    }
+    i32direction
+  }
   fn x_shifting(&self, node: &BinaryTreeRecord) -> f64 {
     let mut x_shift = 0.0;
     let mut try_parent = self.parent(node);
@@ -318,5 +327,22 @@ mod tests {
     let last = row_clone.last().unwrap();
     let tree = BinaryTree(all_rows);
     assert_eq!(tree.x_shifting(last), 1.5);
+  }
+
+  #[test]
+  fn test_direction_to_i32() {
+    let file = File::open("../binary_data.csv").unwrap();
+    let reader = BufReader::new(file);
+    let mut rdr = Reader::from_reader(reader);
+    let mut all_rows = Vec::new();
+
+    for result in rdr.deserialize() {
+        let record: BinaryTreeRecord = result.unwrap();
+        all_rows.push(record);
+    }
+    let row_clone = all_rows.clone();
+    let last = row_clone.last().unwrap();
+    let tree = BinaryTree(all_rows);
+    assert_eq!(tree.direction_to_i32(last), -1);
   }
 }

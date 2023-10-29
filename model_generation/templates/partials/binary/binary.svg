@@ -14,19 +14,8 @@
             {% set x_shift = root.x_shifting(child) %}
             {% set x_shift_parent = root.x_shifting(parent) %}
 
-            {% let direction %}
-            {% let direction_parent %}
-            {% if child.direction == Some(Direction::Left) %}
-                {% set direction = -1 %}
-            {% else %}
-                {% set direction = 1 %}
-            {% endif %}
-
-            {% if parent.direction == Some(Direction::Left) %}
-                {% set direction_parent = -1 %}
-            {% else %}
-                {% set direction_parent = 1 %}
-            {% endif %}
+            {% set direction = root.direction_to_i32(child) %}
+            {% set direction_parent = root.direction_to_i32(parent) %}
 
             {% set x = start_x|to_f64 + (x_shift * h_gap|to_f64) + ((h_gap|to_f64 / level|to_f64) * direction|to_f64) %}
             {% set y = start_y + (v_gap*level) %}
