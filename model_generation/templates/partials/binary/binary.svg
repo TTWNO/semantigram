@@ -43,7 +43,7 @@
             {% set y2 = y - 15 %}
 
             <line data-parent-id="{{ parent.id }}" data-child-id="{{ child.id }}" x1="{{ x1 }}" y1="{{ y1 }}" x2="{{ x2 }}" y2="{{ y2 }}" style="stroke:rgb(0,0,0);stroke-width:2"></line>
-            <text data-id="{{ child.id }}" x="{{ x }}" y="{{ y }}">{{ child.value }} ({{ direction }})</text>
+            <text data-id="{{ child.id }}" x="{{ x }}" y="{{ y }}">{{ child.value }}</text>
 
         {% endif %}
     {% endfor %}
