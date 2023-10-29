@@ -31,7 +31,6 @@ pub struct BinarySvgTemplate {
   pub h_gap: i32,
   pub v_gap: i32,
   pub tree: BinaryTree,
-  pub records: Vec<BinaryTreeRecord>,
 }
 
 #[derive(Clone, Debug, Template)]
@@ -101,7 +100,7 @@ impl std::fmt::Display for Direction {
   }
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct BinaryTreeRecord {
   pub id: i32,
   pub name: String,
@@ -120,12 +119,12 @@ impl BinaryTree {
   fn parent(&self, node: &BinaryTreeRecord) -> Option<BinaryTreeRecord> {
     self.0.clone().into_iter().find(|n| Some(n.id) == node.parent)
   }
-  fn x_shifting(&self, node: &BinaryTreeRecord) -> f32 {
+  fn x_shifting(&self, node: &BinaryTreeRecord) -> f64 {
     let mut x_shift = 0.0;
     let mut try_parent = self.parent(node);
     while try_parent.is_some() {
       let parent_node = try_parent.unwrap();
-      let depth = self.depth(&parent_node) as f32;
+      let depth = self.depth(&parent_node) as f64;
       if depth != 0.0 {
         if parent_node.direction == Some(Direction::Left) {
           x_shift -= 1.0 / depth;
@@ -241,12 +240,11 @@ fn binary_tree_data() -> Result<(), Box<dyn Error>>{
     };
 
     let svg = BinarySvgTemplate {
-      records: all_rows.clone(),
       tree: BinaryTree(all_rows.clone()),
       start_x: 500,
       start_y: 20,
-      h_gap: 50,
-      v_gap: 40,
+      h_gap: 80,
+      v_gap: 60,
     };
 
     // let largest_value = all_rows

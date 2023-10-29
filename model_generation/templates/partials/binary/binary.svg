@@ -1,29 +1,50 @@
 <svg width="1000" height="1000">
     <rect id="background" x="0" y="0" width="1000" height="1000" fill="white"></rect>
 
-    {% let root_node = tree.clone() %}
-    {% set parent_x = start_x %}
+    {% let root = tree.clone() %}
+    {% let root_node = root.0.first().unwrap() %}
 
-{#
     <text data-id="{{ root_node.id }}" x="{{ start_x }}" y="{{ start_y }}">{{ root_node.value }}</text>
 
-    {% let child = root_node.children() %}
-    {% for child in tree %}
-        {% if child.direction == "left" -%}
-            {% let direction = -1 -%}
-        {% else -%}
-            {% let direction = 1 -%}
-        {% endif -%}
-        {% set x = parent_x + ((h_gap/(child.depth()))*direction) %}
-        {% set y = start_y + (v_gap*(child.depth())) %}
-        {% set x1 = parent_x %}
-        {% set x2 = x %}
-        {% set y1 = (start_y * child.depth()) + 2 %}
-        {% set y2 = y - 15 %}
-        {% set parent_x = x %}
+    {% for child in root.0 %}
+        {% if child != root_node %}
+            {% set level = root.depth(child) %}
+            {% set parent = root.parent(child).unwrap() %}
+            {% set level_parent = root.depth(parent) %}
+            {% set x_shift = root.x_shifting(child) %}
+            {% set x_shift_parent = root.x_shifting(parent) %}
 
-        <line data-parent-id="{{ child.parent().id }}" data-child-id="{{ child.id }}" x1="{{ x1 }}" y1="{{ y1 }}" x2="{{ x2 }}" y2="{{ y2 }}"></line>
-        <text data-id="{{ child.id }}" x="{{ x }}" y="{{ y }}">{{ child.value }}</text>
+            {% let direction %}
+            {% let direction_parent %}
+            {% if child.direction == Some(Direction::Left) %}
+                {% set direction = -1 %}
+            {% else %}
+                {% set direction = 1 %}
+            {% endif %}
+
+            {% if parent.direction == Some(Direction::Left) %}
+                {% set direction_parent = -1 %}
+            {% else %}
+                {% set direction_parent = 1 %}
+            {% endif %}
+
+            {% set x = start_x|to_f64 + (x_shift * h_gap|to_f64) + ((h_gap|to_f64 / level|to_f64) * direction|to_f64) %}
+            {% set y = start_y + (v_gap*level) %}
+
+            {% let x1 %}
+            {% if parent.id != root_node.id %}
+                {% set x1 = start_x|to_f64 + (x_shift_parent * h_gap|to_f64) + ((h_gap|to_f64 / level_parent|to_f64) * direction_parent|to_f64) %}
+            {% else %}
+                {% set x1 = start_x|to_f64 %}
+            {% endif %}
+
+            {% set x2 = x %}
+            {% set y1 = start_y + (v_gap * level_parent) + 2 %}
+            {% set y2 = y - 15 %}
+
+            <line data-parent-id="{{ parent.id }}" data-child-id="{{ child.id }}" x1="{{ x1 }}" y1="{{ y1 }}" x2="{{ x2 }}" y2="{{ y2 }}" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+            <text data-id="{{ child.id }}" x="{{ x }}" y="{{ y }}">{{ child.value }} ({{ direction }})</text>
+
+        {% endif %}
     {% endfor %}
-    #}
 </svg>
