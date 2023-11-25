@@ -77,7 +77,7 @@ highlightSocket.onmessage = (event) => {
         const text = `${coordinates} have been focused\n`;
         console.log(text)
         highlightItems.forEach((item) => {
-            item.classList.remove(ElementState.FOCUSED);
+            item.classList.add(ElementState.FOCUSED);
         });
     } else if (action === Action.UNFOCUS) {
         const text = `${coordinates} have been unfocused\n`;
