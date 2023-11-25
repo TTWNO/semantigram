@@ -7,11 +7,9 @@ const highlight_element = (ev) => {
     case "click":
       action = element.classList.contains("highlight") ? "unhighlight" : "highlight";
       break;
-    case "mouseover":
     case "focusin":
       action = "focus";
       break;
-    case "mouseleave":
     case "focusout":
       action = "unfocus";
       break;
@@ -39,6 +37,4 @@ document.querySelectorAll("[data-row],[data-col]")
   .forEach((item) => {
     item.addEventListener("click", highlight_element)
     item.addEventListener("change", highlight_element)
-    item.addEventListener("mouseover", highlight_element)
-    item.addEventListener("mouseleave", highlight_element)
   })
