@@ -1,5 +1,1 @@
-<ul aria-role="tree">
-  {% let root = tree.clone() %}
-  {% let first = root.0.last().unwrap() %}
-  {% let children = root.children(first) %}
-</ul>
+{{ tree|safe }}
