@@ -37,4 +37,6 @@ document.querySelectorAll("[data-row],[data-col]")
   .forEach((item) => {
     item.addEventListener("click", highlight_element)
     item.addEventListener("change", highlight_element)
+    item.addEventListener("focusin", highlight_element)
+    item.addEventListener("focusout", highlight_element)
   })
