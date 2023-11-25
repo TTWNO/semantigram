@@ -4,7 +4,7 @@
     {%- let root = tree.clone() -%}
     {%- let root_node = root.0.first().unwrap() -%}
 
-    <text data-id="{{ root_node.id }}" x="{{ start_x }}" y="{{ start_y }}">{{ root_node.value }}</text>
+    <text data-type="visual" data-col="2" data-row="{{ root_node.id }}" x="{{ start_x }}" y="{{ start_y }}">{{ root_node.value }}</text>
 
     {%- for child in root.0 -%}
         {%- if child != root_node -%}
