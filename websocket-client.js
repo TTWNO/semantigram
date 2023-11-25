@@ -3,12 +3,14 @@ const hostname = window.location.hostname === "" ? "localhost:3000" : window.loc
 // highlight / unhighlight
 const ElementState = Object.freeze({
     HIGHLIGHTED: "highlight",
-    HOVERED: "hovered",
+    FOCUSED: "focus",
     NONE: "",
 });
 const Action = Object.freeze({
     HIGHLIGHT: "highlight",
     UNHIGHLIGHT: "unhighlight",
+    FOCUS: "focus",
+    UNFOCUS: "unfocus",
 })
 
 const websocketServer = ws_proto + "://" + hostname + "/ws";
@@ -71,6 +73,17 @@ highlightSocket.onmessage = (event) => {
           item.classList.remove(ElementState.HIGHLIGHTED);
           item.checked = false;
         });
+    } else if (action === Action.FOCUS) {
+        const text = `${coordinates} have been focused\n`;
+        console.log(text)
+        highlightItems.forEach((item) => {
+            item.classList.remove(ElementState.FOCUSED);
+        });
+    } else if (action === Action.UNFOCUS) {
+        const text = `${coordinates} have been unfocused\n`;
+        console.log(text)
+        highlightItems.forEach((item) => {
+            item.classList.remove(ElementState.FOCUSED);
+        });
     }
-
 };
