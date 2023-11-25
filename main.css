@@ -42,3 +42,8 @@ svg .highlight[data-type="visual"] {
 svg .highlight[data-type="text"] {
   font-weight: bold;
 }
+
+input:focus + label {
+  background-color: blue !important;
+}
+
