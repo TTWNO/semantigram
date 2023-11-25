@@ -14,31 +14,31 @@
 		<tr>
 			<!-- ID -->
 			<td>
-				<label for="cell-{{ loop.index }}-0">{{ record.id }}</label>
 				<input id="cell-{{ loop.index }}-0" type="checkbox" data-row="{{ loop.index }}" class="highlightable sr-only" />
+				<label for="cell-{{ loop.index }}-0">{{ record.id }}</label>
 			</td>
 			<!-- Name -->
 			<td>
-				<label for="cell-{{ loop.index }}-1">{{ record.name }}</label>
 				<input id="cell-{{ loop.index }}-1" type="checkbox" data-col="1" data-row="{{ loop.index }}" class="highlightable sr-only" />
+				<label for="cell-{{ loop.index }}-1">{{ record.name }}</label>
 			</td>
 			<!-- Value -->
 			<td>
-				<label for="cell-{{ loop.index }}-2">{{ record.value }}</label>
 				<input id="cell-{{ loop.index }}-2" type="checkbox" data-col="2" data-row="{{ loop.index }}" class="highlightable sr-only" />
+				<label for="cell-{{ loop.index }}-2">{{ record.value }}</label>
 			</td>
 			<!-- Parent -->
 			<td>
 				{% if record.parent.is_some() %}
-				<label for="cell-{{ loop.index }}-3">{{ record.parent.as_ref().unwrap() }}</label>
 				<input id="cell-{{ loop.index }}-3" type="checkbox" data-col="3" data-row="{{ loop.index }}" class="highlightable sr-only" />
+				<label for="cell-{{ loop.index }}-3">{{ record.parent.as_ref().unwrap() }}</label>
 				{% endif %}
 			</td>
 			<!-- Direction -->
 			<td>
 				{% if record.direction.is_some() %}
-				<label for="cell-{{ loop.index }}-4">{{ record.direction.as_ref().unwrap() }}</label>
 				<input id="cell-{{ loop.index }}-4" type="checkbox" data-col="4" data-row="{{ loop.index }}" class="highlightable sr-only" />
+				<label for="cell-{{ loop.index }}-4">{{ record.direction.as_ref().unwrap() }}</label>
 				{% endif %}
 			</td>
 		</tr>
