@@ -31,7 +31,8 @@ li[role="treeitem"] summary input.focus + label {
 }
 
 li[role="treeitem"] input.highlight + label,
-li[role="treeitem"] summary input.highlight + label {
+li[role="treeitem"] summary input.highlight + label,
+li[role="treeitem"] summary.highlight {
   background-color: #ff8500;
 }
 
