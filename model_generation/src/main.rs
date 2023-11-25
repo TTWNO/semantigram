@@ -43,7 +43,7 @@ pub struct HtmlBinaryTableTemplate {
 #[derive(Clone, Debug, Template)]
 #[template(path = "partials/binary/binary_tree_html_nested_list.html")]
 pub struct HtmlNestedBinaryTableTemplate {
-  pub tree: BinaryTree,
+  pub tree: String,
 }
 
 mod filters {
@@ -74,6 +74,7 @@ mod filters {
 pub struct AlphaTemplate {
     pub table: HtmlBinaryTableTemplate,
     pub svg: BinarySvgTemplate,
+    pub html: HtmlNestedBinaryTableTemplate,
 }
 
 // TODO: replace with generic "dataframe"-like structure.
@@ -170,20 +171,32 @@ impl BinaryTree {
       .filter(|r| self.has_ancestor(node, r))
       .collect())
   }
+  fn to_html_single(&self, node: &BinaryTreeRecord) -> String {
+    let mut html = String::new();
+    html += "<li role=\"treeitem\" tabindex=\"-1\">";
+    html += &format!("<span data-row=\"{}\">", node.id);
+    html += &node.value;
+    let children = self.children(node);
+    if children.0.len() > 0 {
+      html += "<ul role=\"group\">";
+      for child in children.0 {
+        html += &self.to_html_single(&child);
+      }
+      html += "</ul>";
+    }
+    html += "</span>";
+    html += "</li>";
+    html
+  }
 }
 impl IntoNestedList for BinaryTree {
   fn to_html(&self) -> String {
     let root = self.0.first().expect("Does not have a root node!");
-    let mut stack = VecDeque::new();
-    let child_wrap = self.children(root);
-    child_wrap.0
-      .iter()
-      .for_each(|c| stack.push_front(c));
-    while let Some(item) = stack.pop_front() {
-      let children = self.children(item).0;
-      // TODO: add children to stack, then create HTML output
-    }
-    String::new()
+    let mut html = String::new();
+    html += "<ul role=\"tree\">";
+    html += &self.to_html_single(root);
+    html += "</ul>";
+    html
   }
 }
 
@@ -238,10 +251,14 @@ fn binary_tree_data() -> Result<(), Box<dyn Error>>{
         let record: BinaryTreeRecord = result?;
         all_rows.push(record);
     }
+    let btree = BinaryTree(all_rows.clone());
 
     // println!("{:?}", all_rows);
     // let tree_nodes: SinfulBinaryTreeNode = all_rows.into();
     // println!("{:?}", tree_nodes);
+    let html = HtmlNestedBinaryTableTemplate {
+        tree: btree.to_html(),
+    };
 
     let table = HtmlBinaryTableTemplate {
         records: all_rows.clone(),
@@ -249,7 +266,7 @@ fn binary_tree_data() -> Result<(), Box<dyn Error>>{
     };
 
     let svg = BinarySvgTemplate {
-      tree: BinaryTree(all_rows.clone()),
+      tree: btree.clone(),
       start_x: 500,
       start_y: 20,
       h_gap: 80,
@@ -275,7 +292,7 @@ fn binary_tree_data() -> Result<(), Box<dyn Error>>{
     //     largest_value,
     // };
 
-    let alpha = AlphaTemplate { table, svg };
+    let alpha = AlphaTemplate { table, svg, html };
 
     println!("{}", &alpha.render()?);
 
