@@ -43,6 +43,10 @@ svg .highlight[data-type="text"] {
   font-weight: bold;
 }
 
+summary:focus {
+  background-color: blue !important;
+}
+
 input:focus + label {
   background-color: blue !important;
 }
