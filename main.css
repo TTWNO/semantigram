@@ -6,6 +6,12 @@
 	left: -100000px;
 }
 
+details {
+  display: inline-block;
+  background-color: black;
+  color: white;
+}
+
 body {
   font-family: 'monospace';
 }

@@ -111,6 +111,22 @@ pub struct BinaryTreeRecord {
 }
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
+pub enum Relationship {
+  Parent,
+  LeftChild,
+  RightChild,
+}
+impl ToString for Relationship {
+  fn to_string(&self) -> String {
+    match self {
+      Relationship::Parent => "Parent",
+      Relationship::LeftChild => "Left child",
+      Relationship::RightChild => "Right child",
+    }.to_string()
+  }
+}
+
+#[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct BinaryTree(Vec<BinaryTreeRecord>);
 
 impl BinaryTree {
@@ -157,6 +173,12 @@ impl BinaryTree {
     }
     depth
   }
+  fn find(&self, id: i32) -> Option<BinaryTreeRecord> {
+    self.0
+      .iter()
+      .find(|btr| btr.id == id)
+      .cloned()
+  }
   fn has_ancestor(&self, node: &BinaryTreeRecord, ancestor: &BinaryTreeRecord) -> bool {
     let mut parent = node;
     while let Some(parent) = self.parent(parent) {
@@ -171,11 +193,64 @@ impl BinaryTree {
       .filter(|r| self.has_ancestor(node, r))
       .collect())
   }
+  fn connections(&self, node: &BinaryTreeRecord) -> Vec<(Relationship, i32)> {
+    let mut conns = Vec::new();
+    if let Some(parent) = self.parent(node) {
+      conns.push((Relationship::Parent, parent.id));
+    }
+    self.children(node).0
+      .iter()
+      .map(|child| match child.direction {
+        Some(Direction::Left) => (Relationship::LeftChild, child.id),
+        Some(Direction::Right) => (Relationship::RightChild, child.id),
+        None => panic!("A child has no direction; this should never happen, and it means there is bad data!"),
+      })
+      .for_each(|connection| conns.push(connection));
+    conns
+  }
+  fn to_html_connections(&self, node: &BinaryTreeRecord) -> String {
+    let parent = self.parent(node);
+    let children = self.children(node);
+    let mut html = String::new();
+    html += "<details><summary>Connections</summary>";
+    let conns = self.connections(node);
+    if conns.len() > 0 {
+      html += "<ul>";
+      for con in conns {
+        html += "<li>";
+        let con_node = self.find(con.1).expect("Could not find node with a certain ID. You have bad data!");
+        html += &format!("<label for=\"con-{}-with-{}\">", node.id, con_node.id);
+        html += &con.0.to_string();
+        html += "</label>";
+        // to select a child connection, we must actually select the parent column on the child
+        // but to select a parent connection, we simply use the parent column of the current node
+        let row_id = match con.0 {
+          Relationship::Parent => node.id,
+          Relationship::LeftChild | Relationship::RightChild => con_node.id,
+        };
+        html += &format!("<input class=\"highlightable sr-only\" id=\"con-{}-with-{}\" type=\"checkbox\" data-row=\"{}\" data-col=\"{}\"/>", node.id, con_node.id, row_id, 3);
+        html += "</li>";
+      }
+      html += "</ul>";
+    } else {
+      html += "There are no connections";
+    }
+    html += "</details>";
+    html
+  }
   fn to_html_single(&self, node: &BinaryTreeRecord) -> String {
     let mut html = String::new();
     html += "<li role=\"treeitem\" tabindex=\"-1\">";
-    html += &format!("<span data-row=\"{}\">", node.id);
-    html += &node.value;
+    html += "<span>";
+    html += &format!("<label data-row=\"{}\" for=\"node-{}\">", node.id, node.id);
+    if let Some(dir) = node.direction {
+      html += &format!("{} ({})", node.value, dir);
+    } else {
+      html += &format!("{}", node.value);
+    }
+    html += "</label>";
+    html += &format!("<input class=\"highlightable sr-only\" type=\"checkbox\" id=\"node-{}\" data-row=\"{}\"/>", node.id, node.id);
+    html += &self.to_html_connections(node);
     let children = self.children(node);
     if children.0.len() > 0 {
       html += "<ul role=\"group\">";
@@ -184,8 +259,8 @@ impl BinaryTree {
       }
       html += "</ul>";
     }
-    html += "</span>";
     html += "</li>";
+    html += "</span>";
     html
   }
 }
