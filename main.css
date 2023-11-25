@@ -25,13 +25,27 @@ table td {
 	border: 1px solid black;
 }
 
+li[role="treeitem"] input.focus + label,
+li[role="treeitem"] summary input.focus + label {
+  background-color: blue;
+}
+
 li[role="treeitem"] input.highlight + label,
 li[role="treeitem"] summary input.highlight + label {
   background-color: #ff8500;
 }
 
+td:has(input.focus) {
+  background-color: blue;
+}
+
 td:has(input:checked) {
   background-color: #ff8500;
+}
+
+svg .focus[data-type="visual"] {
+  fill: blue;
+  stroke: blue !important;
 }
 
 svg .highlight[data-type="visual"] {
@@ -39,15 +53,16 @@ svg .highlight[data-type="visual"] {
   stroke: #ff8500 !important;
 }
 
+svg .focus[data-type="text"],
 svg .highlight[data-type="text"] {
   font-weight: bold;
 }
 
 summary:focus {
-  background-color: blue !important;
+  background-color: blue;
 }
 
 input:focus + label {
-  background-color: blue !important;
+  background-color: blue;
 }
 
