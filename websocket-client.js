@@ -60,7 +60,7 @@ highlightSocket.onmessage = (event) => {
               selector = `[data-id="${coordinates[0]}"]`;
               break;
           case "link":
-              selector = `[data-parent-id="${coordinates[0]}"][data-child-id="${coordinates[1]}"]`
+              selector = `[data-parent-id="${coordinates[0]}"][data-id="${coordinates[1]}"]`
               break;
           default:
               break;

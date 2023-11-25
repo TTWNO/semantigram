@@ -34,7 +34,7 @@ pub struct BinarySvgTemplate {
 }
 
 #[derive(Clone, Debug, Template)]
-#[template(path = "partials/binary-table.html")]
+#[template(path = "partials/binary/binary-table.html")]
 pub struct HtmlBinaryTableTemplate {
     records: Vec<BinaryTreeRecord>,
     caption: String,
