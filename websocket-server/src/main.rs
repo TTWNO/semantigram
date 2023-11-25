@@ -41,8 +41,8 @@ enum Position {
 enum Action {
     Highlight,
     Unhighlight,
-    // TODO: focus/unfocus
-    // TODO: 
+    Focus,
+    Unfocus
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
