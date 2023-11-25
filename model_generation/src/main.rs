@@ -242,14 +242,14 @@ impl BinaryTree {
     let mut html = String::new();
     html += "<li role=\"treeitem\" tabindex=\"-1\">";
     html += "<span>";
-    html += &format!("<label data-row=\"{}\" for=\"node-{}\">", node.id, node.id);
+    html += &format!("<label for=\"node-{}\">", node.id);
     if let Some(dir) = node.direction {
       html += &format!("{} ({})", node.value, dir);
     } else {
       html += &format!("{}", node.value);
     }
     html += "</label>";
-    html += &format!("<input class=\"highlightable sr-only\" type=\"checkbox\" id=\"node-{}\" data-row=\"{}\"/>", node.id, node.id);
+    html += &format!("<input class=\"highlightable sr-only\" type=\"checkbox\" id=\"node-{}\" data-row=\"{}\" data-col=\"{}\"/>", node.id, node.id, 2);
     html += &self.to_html_connections(node);
     let children = self.children(node);
     if children.0.len() > 0 {
