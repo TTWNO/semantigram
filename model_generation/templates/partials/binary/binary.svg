@@ -33,9 +33,10 @@
 
             {%- set center_x = x1*0.5 + x2*0.5 -%}
             {%- set center_y = y1*0.5 + y2*0.5 -%}
-            <line data-parent-id="{{ parent.id }}" data-id="{{ child.id }}" x1="{{ x1 }}" y1="{{ y1 }}" x2="{{ x2 }}" y2="{{ y2 }}" style="stroke:rgb(0,0,0);stroke-width:2"></line>
-            <circle data-parent-id="{{ parent.id }}" data-id="{{ child.id }}" cx="{{ center_x }}" cy="{{ center_y }}" r="15" opacity="0"></circle>
-            <text data-id="{{ child.id }}" x="{{ x }}" y="{{ y }}">{{ child.value }}</text>
+            <!-- data-col is hardcoded with the column index of the html table for direction and value -->
+            <line data-type="visual" data-col="4" data-row="{{ child.id }}" x1="{{ x1 }}" y1="{{ y1 }}" x2="{{ x2 }}" y2="{{ y2 }}" style="stroke:rgb(0,0,0);stroke-width:2"></line>
+            <circle data-col="4" data-row="{{ child.id }}" cx="{{ center_x }}" cy="{{ center_y }}" r="15" opacity="0"></circle>
+            <text data-type="text" data-col="2" data-row="{{ child.id }}" x="{{ x }}" y="{{ y }}">{{ child.value }}</text>
 
         {%- endif -%}
     {%- endfor -%}

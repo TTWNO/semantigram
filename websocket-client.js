@@ -25,15 +25,6 @@ highlightSocket.onopen = (event) => {
 };
 
 highlightSocket.onmessage = (event) => {
-    // table
-    // {"position": {"type": "row", "data": [2]}, "action": "highlight"} // [null, 2]
-    // {"position": {"type": "column", "data": [2]}, "action": "highlight"} // [2, null]
-    // {"position": {"type": "cell", "data": [0,2]}, "action": "highlight"}
-
-    // binary tree
-    // {"position": {"type": "node", "data": [1]}, "action": "highlight"}
-    // {"position": {"type": "link", "data": [1,2]}, "action": "highlight"}
-
     console.log(event.data);
 
     const datas = JSON.parse(event.data);
@@ -55,12 +46,6 @@ highlightSocket.onmessage = (event) => {
               break;
           case "cell":
               selector = `[data-col="${coordinates[0]}"][data-row="${coordinates[1]}"], [data-col="${coordinates[0]}"].highlight:not([data-row]), [data-row="${coordinates[1]}"].highlight:not([data-col])`;
-              break;
-          case "node":
-              selector = `[data-id="${coordinates[0]}"]`;
-              break;
-          case "link":
-              selector = `[data-parent-id="${coordinates[0]}"][data-id="${coordinates[1]}"]`
               break;
           default:
               break;
