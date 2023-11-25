@@ -49,7 +49,7 @@ document.querySelectorAll("[data-row],[data-col]")
     item.addEventListener("click", highlight_element)
   })
 
-document.querySelectorAll("[data-id],[data-parent-id],[data-child-id]")
+document.querySelectorAll("[data-id],[data-parent-id]")
   .forEach((item) => {
     item.addEventListener("click", highlight_element_binary)
   })
