@@ -219,9 +219,6 @@ impl BinaryTree {
       for con in conns {
         html += "<li>";
         let con_node = self.find(con.1).expect("Could not find node with a certain ID. You have bad data!");
-        html += &format!("<label for=\"con-{}-with-{}\">", node.id, con_node.id);
-        html += &con.0.to_string();
-        html += "</label>";
         // to select a child connection, we must actually select the parent column on the child
         // but to select a parent connection, we simply use the parent column of the current node
         let row_id = match con.0 {
@@ -229,6 +226,9 @@ impl BinaryTree {
           Relationship::LeftChild | Relationship::RightChild => con_node.id,
         };
         html += &format!("<input class=\"highlightable sr-only\" id=\"con-{}-with-{}\" type=\"checkbox\" data-row=\"{}\" data-col=\"{}\"/>", node.id, con_node.id, row_id, 3);
+        html += &format!("<label for=\"con-{}-with-{}\">", node.id, con_node.id);
+        html += &con.0.to_string();
+        html += "</label>";
         html += "</li>";
       }
       html += "</ul>";
@@ -242,6 +242,7 @@ impl BinaryTree {
     let mut html = String::new();
     html += "<li role=\"treeitem\" tabindex=\"-1\">";
     html += "<span>";
+    html += &format!("<input class=\"highlightable sr-only\" type=\"checkbox\" id=\"node-{}\" data-row=\"{}\" data-col=\"{}\"/>", node.id, node.id, 2);
     html += &format!("<label for=\"node-{}\">", node.id);
     if let Some(dir) = node.direction {
       html += &format!("{} ({})", node.value, dir);
@@ -249,7 +250,6 @@ impl BinaryTree {
       html += &format!("{}", node.value);
     }
     html += "</label>";
-    html += &format!("<input class=\"highlightable sr-only\" type=\"checkbox\" id=\"node-{}\" data-row=\"{}\" data-col=\"{}\"/>", node.id, node.id, 2);
     html += &self.to_html_connections(node);
     let children = self.children(node);
     if children.0.len() > 0 {
