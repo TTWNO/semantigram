@@ -1,11 +1,13 @@
 const highlight_element = (ev) => {
   const element = ev.target;
-
   action = "";
+
   switch (ev.type) {
-    case "change":
     case "click":
       action = element.classList.contains("highlight") ? "unhighlight" : "highlight";
+      if (element.tagName == "SUMMARY") {
+        return;
+      }
       break;
     case "focusin":
       action = "focus";
