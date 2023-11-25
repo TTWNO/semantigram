@@ -342,7 +342,7 @@ fn binary_tree_data() -> Result<(), Box<dyn Error>>{
 
     let svg = BinarySvgTemplate {
       tree: btree.clone(),
-      start_x: 500,
+      start_x: 300,
       start_y: 20,
       h_gap: 80,
       v_gap: 60,
