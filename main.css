@@ -51,6 +51,7 @@ svg {
 svg [data-type="visual"],
 svg [data-type="text"] {
 	fill: white;
+	stroke: white;
 }
 
 svg .focus[data-type="visual"] {
