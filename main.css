@@ -8,12 +8,12 @@
 
 details {
   display: inline-block;
-  background-color: black;
-  color: white;
 }
 
 body {
   font-family: 'monospace';
+	background-color: #222222;
+	color: #ffffff;
 }
 
 table {
@@ -22,12 +22,12 @@ table {
 
 table td,
 table td {
-	border: 1px solid black;
+	border: 1px solid white;
 }
 
 li[role="treeitem"] input.focus + label,
 li[role="treeitem"] summary input.focus + label {
-  background-color: blue;
+  background-color: lightblue;
 }
 
 li[role="treeitem"] input.highlight + label,
@@ -45,8 +45,8 @@ td:has(input:checked) {
 }
 
 svg .focus[data-type="visual"] {
-  fill: blue;
-  stroke: blue !important;
+  fill: lightblue;
+  stroke: lightblue !important;
 }
 
 svg .highlight[data-type="visual"] {
@@ -60,10 +60,10 @@ svg .highlight[data-type="text"] {
 }
 
 summary:focus {
-  background-color: blue;
+  background-color: lightblue;
 }
 
 input:focus + label {
-  background-color: blue;
+  background-color: lightblue;
 }
 
