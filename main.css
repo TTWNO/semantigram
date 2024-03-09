@@ -44,6 +44,15 @@ td:has(input:checked) {
   background-color: #ff8500;
 }
 
+svg {
+	background-color: #222222;
+}
+
+svg [data-type="visual"],
+svg [data-type="text"] {
+	fill: white;
+}
+
 svg .focus[data-type="visual"] {
   fill: blue;
   stroke: blue !important;
