@@ -27,7 +27,7 @@ table td {
 
 li[role="treeitem"] input.focus + label,
 li[role="treeitem"] summary input.focus + label {
-  background-color: lightblue;
+  background-color: blue;
 }
 
 li[role="treeitem"] input.highlight + label,
@@ -45,8 +45,8 @@ td:has(input:checked) {
 }
 
 svg .focus[data-type="visual"] {
-  fill: lightblue;
-  stroke: lightblue !important;
+  fill: blue;
+  stroke: blue !important;
 }
 
 svg .highlight[data-type="visual"] {
@@ -60,10 +60,10 @@ svg .highlight[data-type="text"] {
 }
 
 summary:focus {
-  background-color: lightblue;
+  background-color: blue;
 }
 
 input:focus + label {
-  background-color: lightblue;
+  background-color: blue;
 }
 
