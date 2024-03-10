@@ -1,4 +1,13 @@
-# InceptionU Hackathon July 2023
+# Semantigram
+
+- Originally a one-day hackathon project.
+- Since then it has grown to become something I've shwon off at [YYC DataCon](https://www.yycdata.ca/datacon)
+- The concept is in two parts:
+	1. Allow interoperable representations of data: visual _diagrams_, HTML, plain-text, tables, etc. Some of these formats ought to be accessible to the blind using _semantic_ HTML.
+	2. Allow changes to the data: highlights, edits, add/removes to be interoperably applied, regardless of the representation. Changes should be announced to screen-reader users in accessible formats.
+- It combines _semantics_ and _diagrams_.
+
+## TODOs/Dones
 
 * Create a common data format to convert to:
   * SVG: Yes
