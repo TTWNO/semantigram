@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script defer src="websocket-client.js"></script> 
+	<script defer src="interactive-highlight.js"></script>
+	<link rel="stylesheet" href="main.css"/>
+	<meta charset="UTF-8"/>
+</head>
+<body>
+	
+<ul role="tree"><li role="treeitem" tabindex="-1"><span><details><summary data-row="1" data-col="2" class="highlightable">1</summary><ul><li><input class="highlightable sr-only" id="con-1-with-1" type="checkbox" data-row="1" data-col="2"/><label for="con-1-with-1">Self</label></li><li><input class="highlightable sr-only" id="con-1-with-2" type="checkbox" data-row="2" data-col="3"/><label for="con-1-with-2">Left child</label></li><li><input class="highlightable sr-only" id="con-1-with-3" type="checkbox" data-row="3" data-col="3"/><label for="con-1-with-3">Right child</label></li></ul></details><ul role="group"><li role="treeitem" tabindex="-1"><span><details><summary data-row="2" data-col="2" class="highlightable">2 (left)</summary><ul><li><input class="highlightable sr-only" id="con-2-with-2" type="checkbox" data-row="2" data-col="2"/><label for="con-2-with-2">Self</label></li><li><input class="highlightable sr-only" id="con-2-with-1" type="checkbox" data-row="2" data-col="3"/><label for="con-2-with-1">Parent</label></li><li><input class="highlightable sr-only" id="con-2-with-4" type="checkbox" data-row="4" data-col="3"/><label for="con-2-with-4">Right child</label></li></ul></details><ul role="group"><li role="treeitem" tabindex="-1"><span><details><summary data-row="4" data-col="2" class="highlightable">4 (right)</summary><ul><li><input class="highlightable sr-only" id="con-4-with-4" type="checkbox" data-row="4" data-col="2"/><label for="con-4-with-4">Self</label></li><li><input class="highlightable sr-only" id="con-4-with-2" type="checkbox" data-row="4" data-col="3"/><label for="con-4-with-2">Parent</label></li></ul></details></li></span></ul></li></span><li role="treeitem" tabindex="-1"><span><details><summary data-row="3" data-col="2" class="highlightable">3 (right)</summary><ul><li><input class="highlightable sr-only" id="con-3-with-3" type="checkbox" data-row="3" data-col="2"/><label for="con-3-with-3">Self</label></li><li><input class="highlightable sr-only" id="con-3-with-1" type="checkbox" data-row="3" data-col="3"/><label for="con-3-with-1">Parent</label></li><li><input class="highlightable sr-only" id="con-3-with-5" type="checkbox" data-row="5" data-col="3"/><label for="con-3-with-5">Left child</label></li><li><input class="highlightable sr-only" id="con-3-with-6" type="checkbox" data-row="6" data-col="3"/><label for="con-3-with-6">Right child</label></li></ul></details><ul role="group"><li role="treeitem" tabindex="-1"><span><details><summary data-row="5" data-col="2" class="highlightable">5 (left)</summary><ul><li><input class="highlightable sr-only" id="con-5-with-5" type="checkbox" data-row="5" data-col="2"/><label for="con-5-with-5">Self</label></li><li><input class="highlightable sr-only" id="con-5-with-3" type="checkbox" data-row="5" data-col="3"/><label for="con-5-with-3">Parent</label></li></ul></details></li></span><li role="treeitem" tabindex="-1"><span><details><summary data-row="6" data-col="2" class="highlightable">6 (right)</summary><ul><li><input class="highlightable sr-only" id="con-6-with-6" type="checkbox" data-row="6" data-col="2"/><label for="con-6-with-6">Self</label></li><li><input class="highlightable sr-only" id="con-6-with-3" type="checkbox" data-row="6" data-col="3"/><label for="con-6-with-3">Parent</label></li><li><input class="highlightable sr-only" id="con-6-with-7" type="checkbox" data-row="7" data-col="3"/><label for="con-6-with-7">Left child</label></li></ul></details><ul role="group"><li role="treeitem" tabindex="-1"><span><details><summary data-row="7" data-col="2" class="highlightable">7 (left)</summary><ul><li><input class="highlightable sr-only" id="con-7-with-7" type="checkbox" data-row="7" data-col="2"/><label for="con-7-with-7">Self</label></li><li><input class="highlightable sr-only" id="con-7-with-6" type="checkbox" data-row="7" data-col="3"/><label for="con-7-with-6">Parent</label></li></ul></details></li></span></ul></li></span></ul></li></span></ul></li></span></ul>
+<hr />
+<table>
+	<caption>Binary Tree Data</caption>
+	<thead>
+		<tr>
+			<th data-col="0">ID</th>
+			<th data-col="1">Name</th>
+			<th data-col="2">Value</th>
+			<th data-col="3">Parent</th>
+			<th data-col="4">Direction</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		<tr>
+			<!-- ID -->
+			<td>
+				<input id="cell-1-0" type="checkbox" data-row="1" class="highlightable sr-only" />
+				<label for="cell-1-0">1</label>
+			</td>
+			<!-- Name -->
+			<td>
+				<input id="cell-1-1" type="checkbox" data-col="1" data-row="1" class="highlightable sr-only" />
+				<label for="cell-1-1">root</label>
+			</td>
+			<!-- Value -->
+			<td>
+				<input id="cell-1-2" type="checkbox" data-col="2" data-row="1" class="highlightable sr-only" />
+				<label for="cell-1-2">1</label>
+			</td>
+			<!-- Parent -->
+			<td>
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+			</td>
+		</tr>
+		
+		<tr>
+			<!-- ID -->
+			<td>
+				<input id="cell-2-0" type="checkbox" data-row="2" class="highlightable sr-only" />
+				<label for="cell-2-0">2</label>
+			</td>
+			<!-- Name -->
+			<td>
+				<input id="cell-2-1" type="checkbox" data-col="1" data-row="2" class="highlightable sr-only" />
+				<label for="cell-2-1">T1</label>
+			</td>
+			<!-- Value -->
+			<td>
+				<input id="cell-2-2" type="checkbox" data-col="2" data-row="2" class="highlightable sr-only" />
+				<label for="cell-2-2">2</label>
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<input id="cell-2-3" type="checkbox" data-col="3" data-row="2" class="highlightable sr-only" />
+				<label for="cell-2-3">1</label>
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<input id="cell-2-4" type="checkbox" data-col="4" data-row="2" class="highlightable sr-only" />
+				<label for="cell-2-4">left</label>
+				
+			</td>
+		</tr>
+		
+		<tr>
+			<!-- ID -->
+			<td>
+				<input id="cell-3-0" type="checkbox" data-row="3" class="highlightable sr-only" />
+				<label for="cell-3-0">3</label>
+			</td>
+			<!-- Name -->
+			<td>
+				<input id="cell-3-1" type="checkbox" data-col="1" data-row="3" class="highlightable sr-only" />
+				<label for="cell-3-1">T2</label>
+			</td>
+			<!-- Value -->
+			<td>
+				<input id="cell-3-2" type="checkbox" data-col="2" data-row="3" class="highlightable sr-only" />
+				<label for="cell-3-2">3</label>
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<input id="cell-3-3" type="checkbox" data-col="3" data-row="3" class="highlightable sr-only" />
+				<label for="cell-3-3">1</label>
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<input id="cell-3-4" type="checkbox" data-col="4" data-row="3" class="highlightable sr-only" />
+				<label for="cell-3-4">right</label>
+				
+			</td>
+		</tr>
+		
+		<tr>
+			<!-- ID -->
+			<td>
+				<input id="cell-4-0" type="checkbox" data-row="4" class="highlightable sr-only" />
+				<label for="cell-4-0">4</label>
+			</td>
+			<!-- Name -->
+			<td>
+				<input id="cell-4-1" type="checkbox" data-col="1" data-row="4" class="highlightable sr-only" />
+				<label for="cell-4-1">T3</label>
+			</td>
+			<!-- Value -->
+			<td>
+				<input id="cell-4-2" type="checkbox" data-col="2" data-row="4" class="highlightable sr-only" />
+				<label for="cell-4-2">4</label>
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<input id="cell-4-3" type="checkbox" data-col="3" data-row="4" class="highlightable sr-only" />
+				<label for="cell-4-3">2</label>
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<input id="cell-4-4" type="checkbox" data-col="4" data-row="4" class="highlightable sr-only" />
+				<label for="cell-4-4">right</label>
+				
+			</td>
+		</tr>
+		
+		<tr>
+			<!-- ID -->
+			<td>
+				<input id="cell-5-0" type="checkbox" data-row="5" class="highlightable sr-only" />
+				<label for="cell-5-0">5</label>
+			</td>
+			<!-- Name -->
+			<td>
+				<input id="cell-5-1" type="checkbox" data-col="1" data-row="5" class="highlightable sr-only" />
+				<label for="cell-5-1">T4</label>
+			</td>
+			<!-- Value -->
+			<td>
+				<input id="cell-5-2" type="checkbox" data-col="2" data-row="5" class="highlightable sr-only" />
+				<label for="cell-5-2">5</label>
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<input id="cell-5-3" type="checkbox" data-col="3" data-row="5" class="highlightable sr-only" />
+				<label for="cell-5-3">3</label>
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<input id="cell-5-4" type="checkbox" data-col="4" data-row="5" class="highlightable sr-only" />
+				<label for="cell-5-4">left</label>
+				
+			</td>
+		</tr>
+		
+		<tr>
+			<!-- ID -->
+			<td>
+				<input id="cell-6-0" type="checkbox" data-row="6" class="highlightable sr-only" />
+				<label for="cell-6-0">6</label>
+			</td>
+			<!-- Name -->
+			<td>
+				<input id="cell-6-1" type="checkbox" data-col="1" data-row="6" class="highlightable sr-only" />
+				<label for="cell-6-1">T5</label>
+			</td>
+			<!-- Value -->
+			<td>
+				<input id="cell-6-2" type="checkbox" data-col="2" data-row="6" class="highlightable sr-only" />
+				<label for="cell-6-2">6</label>
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<input id="cell-6-3" type="checkbox" data-col="3" data-row="6" class="highlightable sr-only" />
+				<label for="cell-6-3">3</label>
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<input id="cell-6-4" type="checkbox" data-col="4" data-row="6" class="highlightable sr-only" />
+				<label for="cell-6-4">right</label>
+				
+			</td>
+		</tr>
+		
+		<tr>
+			<!-- ID -->
+			<td>
+				<input id="cell-7-0" type="checkbox" data-row="7" class="highlightable sr-only" />
+				<label for="cell-7-0">7</label>
+			</td>
+			<!-- Name -->
+			<td>
+				<input id="cell-7-1" type="checkbox" data-col="1" data-row="7" class="highlightable sr-only" />
+				<label for="cell-7-1">T6</label>
+			</td>
+			<!-- Value -->
+			<td>
+				<input id="cell-7-2" type="checkbox" data-col="2" data-row="7" class="highlightable sr-only" />
+				<label for="cell-7-2">7</label>
+			</td>
+			<!-- Parent -->
+			<td>
+				
+				<input id="cell-7-3" type="checkbox" data-col="3" data-row="7" class="highlightable sr-only" />
+				<label for="cell-7-3">6</label>
+				
+			</td>
+			<!-- Direction -->
+			<td>
+				
+				<input id="cell-7-4" type="checkbox" data-col="4" data-row="7" class="highlightable sr-only" />
+				<label for="cell-7-4">left</label>
+				
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+<!-- a place to render updates -->
+<textarea editable="false" role="log" id="a11y-log" class="sr-only" aria-live="polite" aria-atomic="false"></textarea>
+<hr />
+<svg width="1000" height="1000">
+    <rect id="background" x="0" y="0" width="1000" height="1000" fill="black"></rect><text data-type="visual" data-col="2" data-row="1" x="300" y="20" style="stroke:rgb(255,255,255);fill:rgb(255,255,255)">1</text><!-- data-col is hardcoded with the column index of the html table for direction and value -->
+            <line data-type="visual" data-col="3" data-row="2" x1="296" y1="24" x2="220" y2="62" style="stroke:rgb(255,255,255);stroke-width:2"></line>
+            <!--<circle data-col="3" data-row="2" cx="258" cy="43" r="15" opacity="0"></circle>-->
+            <text data-type="visual" data-col="2" data-row="2" x="217" y="80" style="stroke:rgb(255,255,255);fill:rgb(255,255,255)">2</text><!-- data-col is hardcoded with the column index of the html table for direction and value -->
+            <line data-type="visual" data-col="3" data-row="3" x1="304" y1="24" x2="380" y2="62" style="stroke:rgb(255,255,255);stroke-width:2"></line>
+            <!--<circle data-col="3" data-row="3" cx="342" cy="43" r="15" opacity="0"></circle>-->
+            <text data-type="visual" data-col="2" data-row="3" x="377" y="80" style="stroke:rgb(255,255,255);fill:rgb(255,255,255)">3</text><!-- data-col is hardcoded with the column index of the html table for direction and value -->
+            <line data-type="visual" data-col="3" data-row="4" x1="224" y1="84" x2="260" y2="122" style="stroke:rgb(255,255,255);stroke-width:2"></line>
+            <!--<circle data-col="3" data-row="4" cx="242" cy="103" r="15" opacity="0"></circle>-->
+            <text data-type="visual" data-col="2" data-row="4" x="257" y="140" style="stroke:rgb(255,255,255);fill:rgb(255,255,255)">4</text><!-- data-col is hardcoded with the column index of the html table for direction and value -->
+            <line data-type="visual" data-col="3" data-row="5" x1="376" y1="84" x2="340" y2="122" style="stroke:rgb(255,255,255);stroke-width:2"></line>
+            <!--<circle data-col="3" data-row="5" cx="358" cy="103" r="15" opacity="0"></circle>-->
+            <text data-type="visual" data-col="2" data-row="5" x="337" y="140" style="stroke:rgb(255,255,255);fill:rgb(255,255,255)">5</text><!-- data-col is hardcoded with the column index of the html table for direction and value -->
+            <line data-type="visual" data-col="3" data-row="6" x1="384" y1="84" x2="420" y2="122" style="stroke:rgb(255,255,255);stroke-width:2"></line>
+            <!--<circle data-col="3" data-row="6" cx="402" cy="103" r="15" opacity="0"></circle>-->
+            <text data-type="visual" data-col="2" data-row="6" x="417" y="140" style="stroke:rgb(255,255,255);fill:rgb(255,255,255)">6</text><!-- data-col is hardcoded with the column index of the html table for direction and value -->
+            <line data-type="visual" data-col="3" data-row="7" x1="416" y1="144" x2="393.3333333333333" y2="182" style="stroke:rgb(255,255,255);stroke-width:2"></line>
+            <!--<circle data-col="3" data-row="7" cx="404.66666666666663" cy="163" r="15" opacity="0"></circle>-->
+            <text data-type="visual" data-col="2" data-row="7" x="390.3333333333333" y="200" style="stroke:rgb(255,255,255);fill:rgb(255,255,255)">7</text></svg>
+
+</body>
+</html>
