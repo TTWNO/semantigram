@@ -1,5 +1,5 @@
 const ws_proto = window.location.protocol === "https:" ? "wss" : "ws";
-const hostname = window.location.hostname === "" ? "localhost:3000" : window.location.hostname;
+const hostname = window.location.hostname === "" || "localhost" ? "localhost:3000" : window.location.hostname;
 // highlight / unhighlight
 const ElementState = Object.freeze({
     HIGHLIGHTED: "highlight",
