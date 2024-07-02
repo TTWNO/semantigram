@@ -31,8 +31,8 @@ const highlight_element = (ev) => {
     coordinates = [parseInt(x_col)];
   }
   
-  console.log(JSON.stringify({position: {type: elementType, data: coordinates}, action: action}))
-  highlightSocket.send(JSON.stringify({position: {type: elementType, data: coordinates}, action: action}))
+  const json = JSON.stringify({position: {type: elementType, data: coordinates}, action: action});
+  highlightSocket.send(json);
 }
 
 document.querySelectorAll("[data-row],[data-col]")
